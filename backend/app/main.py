@@ -1,0 +1,22 @@
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+
+from app.api.enrichment_routes import router as enrichment_router
+from app.core.config import settings
+
+app = FastAPI(title="Transaction Enrichment API", version="0.1.0")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=settings.cors_allowed_origins,  # Angular dev server by default
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+app.include_router(enrichment_router)
+
+
+@app.get("/health", tags=["health"])
+def health_check() -> dict:
+    return {"status": "ok"}

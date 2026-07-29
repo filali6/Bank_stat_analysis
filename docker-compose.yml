@@ -1,0 +1,20 @@
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+    environment:
+      - APP_FUZZY_THRESHOLD=80
+      - APP_TFIDF_THRESHOLD=0.3
+      - APP_CORS_ALLOWED_ORIGINS=["http://localhost:4200"]
+
+  # Le frontend Angular sera ajouté ici à la prochaine étape :
+  #
+  # frontend:
+  #   build: ./frontend
+  #   ports:
+  #     - "4200:4200"
+  #   depends_on:
+  #     - backend
