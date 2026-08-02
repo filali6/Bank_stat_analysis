@@ -52,11 +52,7 @@ class EnrichmentService:
         recurring_detected = detect_recurring(transactions, raw_results, index)
         recurring = result.recurring or recurring_detected
 
-        confidence = result.confidence
-        if recurring_detected and result.recurring:
-            confidence = min(confidence + 10, 99)
-        if result.merchant == "Unknown":
-            confidence = 0
+          
 
         normalized_description = (
             f"{result.merchant} {result.subcategory}"
@@ -70,39 +66,22 @@ class EnrichmentService:
             libelle_brut=txn.libelle_brut,
             montant=txn.montant,
             merchant=result.merchant,
-            category=result.category,
-            subcategory=result.subcategory,
             payment_channel=result.channel,
             transaction_type=result.type,
             recurring=recurring,
             income_flag=result.income,
             normalized_description=normalized_description,
-            confidence=confidence,
-            status=self._status_for(confidence),
-            matched_by=result.matched_by,
+             
         )
 
-    @staticmethod
-    def _status_for(confidence: int) -> str:
-        if confidence >= VALIDATED_THRESHOLD:
-            return "validated"
-        if confidence >= REVIEW_THRESHOLD:
-            return "review"
-        return "unknown"
+     
 
     @staticmethod
     def _build_response(enriched: List[EnrichedTransaction]) -> EnrichmentResponse:
         total = len(enriched)
-        validated = sum(1 for e in enriched if e.status == "validated")
-        review = sum(1 for e in enriched if e.status == "review")
-        unknown = sum(1 for e in enriched if e.status == "unknown")
-        average_confidence = round(sum(e.confidence for e in enriched) / total, 1) if total else 0.0
+        
 
         return EnrichmentResponse(
             total=total,
-            validated=validated,
-            review=review,
-            unknown=unknown,
-            average_confidence=average_confidence,
             transactions=enriched,
         )

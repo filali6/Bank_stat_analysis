@@ -1,0 +1,60 @@
+{
+  "header": { "title": "analyse relevé bancaire" },
+  "hero": {
+    "eyebrow": "Prototype interne",
+    "title": "Transaction Enrichment",
+    "subtitle": "Importe un relevé bancaire (CSV) et récupère un tableau enrichi ",
+    "dropzoneTitle": "Dépose ton relevé ici",
+    "dropzoneHintPrefix": "Glisser-déposer ou",
+    "dropzoneHintLink": "choisir un fichier CSV",
+    "uploadButton": "Importer le relevé (CSV)",
+    "uploadButtonLoading": "Analyse en cours…",
+    "securityNote": "Colonnes attendues : date, libellé, montant, code MCC ."
+  },
+  "steps": {
+    "title": "Comment ça marche",
+    "step1Title": "Importer le relevé",
+    "step1Desc": "Dépose un export CSV de tes transactions bancaires brutes.",
+    "step2Title": "Le pipeline analyse",
+    "step2Desc": "Reconnaissance du marchand , règles métier, détection de récurrence...",
+    "step3Title": "Résultat instantané",
+    "step3Desc": "Un tableau enrichi avec un score de confiance par transaction."
+  },
+  "stepper": {
+    "step1": "Enrichment",
+    "step2": "Categorization",
+    "step3": "Feature Engineering",
+    "step4": "Lifestyle Intelligence",
+    "next": "Suivant",
+    "back": "Retour",
+    "categorizeButton": "Catégoriser",
+    "categorizing": "Catégorisation en cours…",
+    "placeholder": "Étape à venir — pas encore implémentée."
+  },
+  "results": {
+    "total": "Total",
+    "searchPlaceholder": "Chercher un libellé, marchand, catégorie…"
+  },
+  "table": {
+    "headers": {
+      "date": "Date",
+      "libelle": "Libellé brut",
+      "montant": "Montant",
+      "merchant": "Marchand",
+      "category": "Catégorie",
+      "lifestyleTag": "Type de dépense",
+      "channel": "Canal",
+      "type": "Type",
+      "recurring": "Récurrent",
+      "incomeFlag": "Revenu",
+      "normalizedDescription": "Description normalisée",
+      "confidence": "Confiance"
+    },
+    "recurringYes": "Oui",
+    "recurringNo": "Non",
+    "emptyRow": "Aucune transaction ne correspond à ce filtre."
+  },
+  "error": {
+    "generic": "Impossible de traiter ce fichier .. vérifie qu'il s'agit bien d'un CSV avec les bonnes colonnes."
+  }
+}

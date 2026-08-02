@@ -1,0 +1,52 @@
+<section class="hero">
+  <span class="eyebrow">{{ 'hero.eyebrow' | translate }}</span>
+  <h1>{{ 'hero.title' | translate }}</h1>
+  <p class="subtitle">{{ 'hero.subtitle' | translate }}</p>
+
+  <div class="dropzone" [class.drag-over]="isDragOver" (dragover)="onDragOver($event)" (dragleave)="onDragLeave()"
+    (drop)="onDrop($event)">
+    <div class="dropzone-icon">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+        <path d="M12 16V4M12 4l-4 4M12 4l4 4" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </div>
+
+    <p class="dropzone-title">{{ 'hero.dropzoneTitle' | translate }}</p>
+    <p class="dropzone-hint">
+      {{ 'hero.dropzoneHintPrefix' | translate }} <span>{{ 'hero.dropzoneHintLink' | translate }}</span>
+    </p>
+
+    <label class="upload-button" [class.disabled]="isLoading">
+      <input type="file" accept=".csv" (change)="onFileInputChange($event)" [disabled]="isLoading" hidden />
+      {{ isLoading ? ('hero.uploadButtonLoading' | translate) : ('hero.uploadButton' | translate) }}
+    </label>
+
+    @if (errorMessage) {
+    <p class="error">{{ errorMessage }}</p>
+    }
+  </div>
+
+  <p class="security-note">{{ 'hero.securityNote' | translate }}</p>
+</section>
+
+<section class="steps">
+  <h2>{{ 'steps.title' | translate }}</h2>
+  <div class="steps-grid">
+    <div class="step-card">
+      <div class="step-icon">1</div>
+      <p class="step-title">{{ 'steps.step1Title' | translate }}</p>
+      <p class="step-desc">{{ 'steps.step1Desc' | translate }}</p>
+    </div>
+    <div class="step-card">
+      <div class="step-icon">2</div>
+      <p class="step-title">{{ 'steps.step2Title' | translate }}</p>
+      <p class="step-desc">{{ 'steps.step2Desc' | translate }}</p>
+    </div>
+    <div class="step-card">
+      <div class="step-icon">3</div>
+      <p class="step-title">{{ 'steps.step3Title' | translate }}</p>
+      <p class="step-desc">{{ 'steps.step3Desc' | translate }}</p>
+    </div>
+  </div>
+</section>

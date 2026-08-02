@@ -18,6 +18,8 @@ class Settings(BaseSettings):
     fuzzy_threshold: int = 80
     tfidf_threshold: float = 0.3
     cors_allowed_origins: list[str] = ["http://localhost:4200"]
+    business_lifestyle_mapping_path: Path = APP_DIR / "data" / "business_lifestyle_mapping.json"
+    category_model_bundle_path: Path = APP_DIR / "data" / "models" / "category_model_bundle.pkl"
 
 
 settings = Settings()

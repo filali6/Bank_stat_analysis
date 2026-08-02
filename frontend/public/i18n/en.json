@@ -1,0 +1,60 @@
+{
+  "header": { "title": "Bank statement analysis" },
+  "hero": {
+    "eyebrow": "DEMO",
+    "title": "Transaction Enrichment",
+    "subtitle": "Upload a bank statement (CSV) and get an enriched table back ",
+    "dropzoneTitle": "Drop your statement here",
+    "dropzoneHintPrefix": "Drag and drop or",
+    "dropzoneHintLink": "choose a CSV file",
+    "uploadButton": "Upload statement (CSV)",
+    "uploadButtonLoading": "Analyzing…",
+    "securityNote": "Expected columns: date, label, amount, MCC code "
+  },
+  "steps": {
+    "title": "How it works",
+    "step1Title": "Upload the statement",
+    "step1Desc": "Drop a CSV export of your raw bank transactions.",
+    "step2Title": "The pipeline analyzes",
+    "step2Desc": "Merchant recognition , business rules, recurrence detection...",
+    "step3Title": "Instant result",
+    "step3Desc": "An enriched table with a confidence score per transaction."
+  },
+  "stepper": {
+    "step1": "Enrichment",
+    "step2": "Categorization",
+    "step3": "Feature Engineering",
+    "step4": "Lifestyle Intelligence",
+    "next": "Next",
+    "back": "Back",
+    "categorizeButton": "Categorize",
+    "categorizing": "Categorizing…",
+    "placeholder": "Upcoming step => not yet implemented."
+  },
+  "results": {
+    "total": "Total",
+    "searchPlaceholder": "Search a label, merchant, category…"
+  },
+  "table": {
+    "headers": {
+      "date": "Date",
+      "libelle": "Raw label",
+      "montant": "Amount",
+      "merchant": "Merchant",
+      "category": "Category",
+      "lifestyleTag": "Spending type",
+      "channel": "Channel",
+      "type": "Type",
+      "recurring": "Recurring",
+      "incomeFlag": "Income",
+      "normalizedDescription": "Normalized description",
+      "confidence": "Confidence"
+    },
+    "recurringYes": "Yes",
+    "recurringNo": "No",
+    "emptyRow": "No transaction matches this filter."
+  },
+  "error": {
+    "generic": "Couldn't process this file ..check that it's a CSV with the right columns."
+  }
+}
