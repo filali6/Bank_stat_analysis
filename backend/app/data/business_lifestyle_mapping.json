@@ -35,6 +35,9 @@
     { "category": "Travel", "subcategory": "Flight", "business_purpose": "Personal", "lifestyle_tag": "Discretionary Spending" },
     { "category": "Fees", "subcategory": "Overdraft", "business_purpose": "Personal", "lifestyle_tag": "Fees" },
     { "category": "Fees", "subcategory": "Monthly Fee", "business_purpose": "Personal", "lifestyle_tag": "Fees" },
-    { "category": "Savings", "subcategory": "Transfer", "business_purpose": "Personal", "lifestyle_tag": "Savings" }
+    { "category": "Savings", "subcategory": "Transfer", "business_purpose": "Personal", "lifestyle_tag": "Savings" },
+    { "category": "Savings", "subcategory": "Investment", "business_purpose": "Personal", "lifestyle_tag": "Savings" },
+    { "category": "Subscription", "subcategory": "Software", "business_purpose": "Personal", "lifestyle_tag": "Discretionary Spending" },
+    { "category": "Education", "subcategory": "Student Loan", "business_purpose": "Personal", "lifestyle_tag": "Debt Payment" }
   ]
 }

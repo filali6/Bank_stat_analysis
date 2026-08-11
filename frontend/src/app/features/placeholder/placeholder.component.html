@@ -1,0 +1,13 @@
+<div class="back-row">
+  <button class="back-link-btn" (click)="goBack()">← {{ 'stepper.back' | translate }}</button>
+</div>
+
+<p class="placeholder-note">{{ titleKey | translate }} : {{ 'stepper.placeholder' | translate }}</p>
+
+<div class="step-actions">
+  @if (nextRoute) {
+    <button class="next-button" (click)="goNext()">{{ 'stepper.next' | translate }} →</button>
+  } @else {
+    <button class="next-button" (click)="finish()">{{ 'stepper.finish' | translate }}</button>
+  }
+</div>

@@ -1,16 +1,17 @@
 import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 import { TranslatePipe } from '../../core/pipes/translate.pipe';
 import { Lang, TranslationService } from '../../core/services/translation.service';
 
 @Component({
-  selector: 'app-header',
+  selector: 'app-sidebar',
   standalone: true,
-  imports: [TranslatePipe],
-  templateUrl: './header.component.html',
-  styleUrl: './header.component.css',
+  imports: [RouterLink, TranslatePipe],
+  templateUrl: './sidebar.component.html',
+  styleUrl: './sidebar.component.css',
 })
-export class HeaderComponent {
+export class SidebarComponent {
   constructor(readonly translation: TranslationService) {}
 
   setLang(lang: Lang): void {

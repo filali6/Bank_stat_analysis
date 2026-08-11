@@ -1,20 +1,13 @@
 @if (totalPages > 1) {
-<nav class="pagination">
-    <button class="page-btn nav" [disabled]="currentPage === 1" (click)="goTo(currentPage - 1)" aria-label="Previous">
-        ‹
-    </button>
-
+  <nav class="pagination">
+    <button class="page-btn nav" [disabled]="currentPage === 1" (click)="goTo(currentPage - 1)" aria-label="Previous">‹</button>
     @for (page of pages; track $index) {
-    @if (page === 'ellipsis') {
-    <span class="ellipsis">…</span>
-    } @else {
-    <button class="page-btn" [class.active]="page === currentPage" (click)="goTo(page)">{{ page }}</button>
+      @if (page === 'ellipsis') {
+        <span class="ellipsis">…</span>
+      } @else {
+        <button class="page-btn" [class.active]="page === currentPage" (click)="goTo(page)">{{ page }}</button>
+      }
     }
-    }
-
-    <button class="page-btn nav" [disabled]="currentPage === totalPages" (click)="goTo(currentPage + 1)"
-        aria-label="Next">
-        ›
-    </button>
-</nav>
+    <button class="page-btn nav" [disabled]="currentPage === totalPages" (click)="goTo(currentPage + 1)" aria-label="Next">›</button>
+  </nav>
 }

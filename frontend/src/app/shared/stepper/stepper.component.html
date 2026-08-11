@@ -1,19 +1,16 @@
-<div class="stepper">
-    @for (step of steps; track step.label; let i = $index) {
-    <div class="step">
-        <div class="step-circle" [class.completed]="isCompleted(i)" [class.active]="isActive(i)">
-            @if (isCompleted(i)) {
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
-                <path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-            } @else {
-            {{ i + 1 }}
-            }
-        </div>
-        <span class="step-label" [class.active]="isActive(i)">{{ step.label }}</span>
+<div class="stepper" [class.horizontal]="orientation === 'horizontal'" [class.vertical]="orientation === 'vertical'">
+  @for (step of steps; track step.label; let i = $index) {
+  <div class="stepper-item" [class.disabled]="!step.enabled" (click)="onStepClick(i)">
+    <div class="stepper-circle" [class.completed]="isCompleted(i)" [class.active]="isActive(i)">
+      @if (isCompleted(i)) {
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+        <path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+      } @else { {{ i + 1 }} }
     </div>
-
-    @if (i < steps.length - 1) { <div class="step-connector" [class.completed]="isCompleted(i)">
+    <span class="stepper-label" [class.active]="isActive(i)">{{ step.label }}</span>
+  </div>
+  @if (i < steps.length - 1) { <div class="stepper-connector" [class.completed]="isCompleted(i)">
 </div>
 }
 }

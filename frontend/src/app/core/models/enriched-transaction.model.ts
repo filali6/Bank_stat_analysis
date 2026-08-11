@@ -28,3 +28,11 @@ export interface CategorizationResponse {
   total: number;
   transactions: CategorizedTransaction[];
 }
+export interface ClientFeatures {
+  monthly_income: number;
+  savings_rate: number;
+  travel_spend_ratio: number;
+  grocery_spend_ratio: number;
+  recurring_commitments: number;
+  atm_withdrawal_ratio: number;
+}

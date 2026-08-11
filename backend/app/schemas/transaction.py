@@ -69,3 +69,24 @@ class CategorizedTransaction(EnrichedTransaction):
 class CategorizationResponse(BaseModel):
     total: int
     transactions: List[CategorizedTransaction]
+    
+
+class ClientFeatures(BaseModel):
+    """The 6 outputs of the Feature Engineering step — pure statistics
+    computed over a client's full categorized transaction history, no
+    machine learning involved (unlike Categorization)."""
+
+    monthly_income: float
+    savings_rate: float
+    travel_spend_ratio: float
+    grocery_spend_ratio: float
+    recurring_commitments: float
+    atm_withdrawal_ratio: float
+    
+
+class CategorizedTransactionsInput(BaseModel):
+    """Wraps a list of already-categorized transactions — used to CHAIN
+    Feature Engineering onto the previous step's result, instead of
+    re-running Enrichment+Categorization from scratch."""
+
+    transactions: List[CategorizedTransaction]

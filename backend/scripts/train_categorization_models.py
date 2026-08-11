@@ -1,12 +1,3 @@
-"""Offline training script — run manually (never inside the API):
-
-    python -m scripts.train_categorization_models --input path/to/transactions_enriched.csv
-
-Produces app/data/models/category_model_bundle.pkl, loaded at runtime
-by CategoryModelRepository. Re-run this whenever you want to retrain
-on fresh/more data.
-"""
-
 import argparse
 import sys
 from pathlib import Path
@@ -31,6 +22,12 @@ from app.utils.text_normalization import normalize_text
 MIN_SAMPLES_PER_CLASS = 5
 TIME_BUDGET_SECONDS = 60
 
+# Séparateur utilisé pour fusionner category+subcategory en une seule
+# cible — évite qu'un modèle devine "Food" pendant qu'un autre devine
+# "Electronics" indépendamment, ce qui produisait des combinaisons
+# impossibles (ex: "Food · Electronics").
+COMBO_SEPARATOR = " · "
+
 
 def build_training_dataframe(csv_path: Path, merchant_repository: MerchantRepository,
                               business_lifestyle_repository: BusinessLifestyleRepository) -> pd.DataFrame:
@@ -49,7 +46,12 @@ def build_training_dataframe(csv_path: Path, merchant_repository: MerchantReposi
         lambda row: business_lifestyle_repository.get_labels(row["category"], row["subcategory"]), axis=1
     ))
 
-    # Only rows with a certain category can be used as training examples
+    # Nouvelle cible combinée : "Food · Coffee", "Housing · Rent"...
+    # Un seul modèle choisit parmi des combinaisons qui ont VRAIMENT
+    # existé dans les données — il ne peut plus inventer un mélange
+    # incohérent qui n'a jamais été observé.
+    df["category_subcategory"] = df["category"] + COMBO_SEPARATOR + df["subcategory"]
+
     return df[df["category"] != "Unknown"].copy()
 
 
@@ -97,14 +99,14 @@ def train_target(df: pd.DataFrame, feature_matrix, target_column: str) -> dict:
         metric="accuracy", verbose=0,
     )
     accuracy = automl.score(X_test, y_test)
-    print(f"[{target_column}] Meilleur : {automl.best_estimator} → précision : {accuracy:.1%}")
+    print(f"[{target_column}] Meilleur : {automl.best_estimator} → précision : {accuracy:.1%} (sur {len(y_test)} exemples, {y.nunique()} classes)")
 
     return {"model": automl, "label_encoder": label_encoder, "constant_value": None}
 
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--input", type=Path, required=True, help="Path to transactions_enriched.csv")
+    parser.add_argument("--input", type=Path, required=True, help="Path to an ENRICHED transactions CSV")
     parser.add_argument("--output", type=Path, default=settings.category_model_bundle_path)
     args = parser.parse_args()
 
@@ -118,13 +120,16 @@ def main():
     feature_matrix, feature_columns = build_feature_matrix(df, vectorizer)
 
     targets = {}
-    for target in ["category", "subcategory", "lifestyle_tag"]:
+    # "category_subcategory" remplace "category" + "subcategory" séparés.
+    # "business_purpose" est maintenant entraîné, plus codé en dur.
+    for target in ["category_subcategory", "business_purpose", "lifestyle_tag"]:
         targets[target] = train_target(df, feature_matrix, target)
 
     bundle = {
         "vectorizer": vectorizer,
         "feature_columns": feature_columns,
         "targets": targets,
+        "combo_separator": COMBO_SEPARATOR,
     }
 
     args.output.parent.mkdir(parents=True, exist_ok=True)

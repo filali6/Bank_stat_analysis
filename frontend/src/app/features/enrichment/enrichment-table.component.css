@@ -1,5 +1,2 @@
 @import '../../shared/styles/results-table-common.css';
-
-:host {
-    display: block;
-}
+:host { display: block; }

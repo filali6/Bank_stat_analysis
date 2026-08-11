@@ -1,35 +1,59 @@
 {
-  "header": { "title": "analyse relevé bancaire" },
+  "header": { "title": "Bank Statement Analyzer" },
+  "sidebar": {
+    "prototypeBadge": "Demo",
+    "dashboard": "Dashboard",
+    "history": "Historique (bientôt)",
+    "admin": "Admin (bientôt)",
+    "backToDashboard": "Retour au dashboard",
+    "footer": "démo"
+  },
+  "dashboard": {
+    "eyebrow": "Vue d'ensemble",
+    "title": "Bonjour,",
+    "subtitle": "Retrouve tes études précédentes ou démarre une nouvelle analyse de relevé bancaire.",
+    "statTotal": "Études ce mois",
+    "statPending": "En attente de décision",
+    "statValidated": "Validées",
+    "newStudy": "Nouvelle étude",
+    "tableClient": "Client",
+    "tableDate": "Date",
+    "tableOutput": "Résultat demandé",
+    "tableStatus": "Statut",
+    "status": { "validated": "Validé", "review": "À revoir", "pending": "En attente" }
+  },
+  "chooseOutput": {
+    "eyebrow": "Étape 0",
+    "title": "Quel résultat veux-tu obtenir ?",
+    "subtitle": "Choisis ce que l'analyse doit produire à partir du relevé .",
+    "selected": "Sélectionné"
+  },
   "hero": {
-    "eyebrow": "Prototype interne",
+    "eyebrow": "demo",
     "title": "Transaction Enrichment",
-    "subtitle": "Importe un relevé bancaire (CSV) et récupère un tableau enrichi ",
+    "subtitle": "Importe un relevé bancaire et récupère un tableau enrichi .",
     "dropzoneTitle": "Dépose ton relevé ici",
     "dropzoneHintPrefix": "Glisser-déposer ou",
     "dropzoneHintLink": "choisir un fichier CSV",
     "uploadButton": "Importer le relevé (CSV)",
     "uploadButtonLoading": "Analyse en cours…",
-    "securityNote": "Colonnes attendues : date, libellé, montant, code MCC ."
-  },
-  "steps": {
-    "title": "Comment ça marche",
-    "step1Title": "Importer le relevé",
-    "step1Desc": "Dépose un export CSV de tes transactions bancaires brutes.",
-    "step2Title": "Le pipeline analyse",
-    "step2Desc": "Reconnaissance du marchand , règles métier, détection de récurrence...",
-    "step3Title": "Résultat instantané",
-    "step3Desc": "Un tableau enrichi avec un score de confiance par transaction."
+    "securityNote": "Colonnes attendues : date, libellé, montant, code MCC."
   },
   "stepper": {
     "step1": "Enrichment",
     "step2": "Categorization",
     "step3": "Feature Engineering",
     "step4": "Lifestyle Intelligence",
+    "step5": "Décision",
     "next": "Suivant",
     "back": "Retour",
+    "finish": "Terminer",
     "categorizeButton": "Catégoriser",
     "categorizing": "Catégorisation en cours…",
-    "placeholder": "Étape à venir — pas encore implémentée."
+    "placeholder": "Étape à venir pas encore implémentée."
+  },
+  "categorizationPage": {
+    "needEnrichmentFirst": "Importe d'abord un relevé à l'étape Enrichment."
   },
   "results": {
     "total": "Total",
@@ -54,7 +78,17 @@
     "recurringNo": "Non",
     "emptyRow": "Aucune transaction ne correspond à ce filtre."
   },
+  "featureEngineering": {
+  "needCategorizationFirst": "Catégorise d'abord le relevé à l'étape précédente.",
+  "computeButton": "Calculer les indicateurs",
+  "computing": "Calcul en cours…",
+  "monthlyIncome": "Revenu mensuel",
+  "savingsRate": "Taux d'épargne",
+  "travelRatio": "Ratio dépenses voyage",
+  "groceryRatio": "Ratio dépenses épicerie",
+  "recurringCommitments": "Engagements récurrents",
+  "atmRatio": "Ratio retrait DAB"
+},
   "error": {
-    "generic": "Impossible de traiter ce fichier .. vérifie qu'il s'agit bien d'un CSV avec les bonnes colonnes."
-  }
+    "generic": "Impossible de traiter ce fichier ."}
 }

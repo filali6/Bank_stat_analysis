@@ -1,21 +1,22 @@
-import { Component, Input } from '@angular/core';
-import { TranslatePipe } from '../../core/pipes/translate.pipe';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 export interface Step {
   label: string;
+  enabled: boolean;
 }
 
 @Component({
   selector: 'app-stepper',
   standalone: true,
-  imports: [TranslatePipe],
   templateUrl: './stepper.component.html',
   styleUrl: './stepper.component.css',
 })
 export class StepperComponent {
   @Input() steps: Step[] = [];
-  /** 1-based: which step is currently active. */
   @Input() currentStep = 1;
+  @Input() orientation: 'horizontal' | 'vertical' = 'horizontal';
+
+  @Output() stepClick = new EventEmitter<number>();
 
   isCompleted(stepIndex: number): boolean {
     return stepIndex + 1 < this.currentStep;
@@ -23,5 +24,11 @@ export class StepperComponent {
 
   isActive(stepIndex: number): boolean {
     return stepIndex + 1 === this.currentStep;
+  }
+
+  onStepClick(stepIndex: number): void {
+    if (this.steps[stepIndex]?.enabled) {
+      this.stepClick.emit(stepIndex + 1);
+    }
   }
 }

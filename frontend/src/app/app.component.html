@@ -1,49 +1,6 @@
-<app-header>
-  <app-stepper [steps]="steps()" [currentStep]="currentStep()"></app-stepper>
-</app-header>
-
-<main>
-  @if (currentStep() === 1) {
-  <app-upload-zone [isLoading]="isLoadingEnrichment()" [errorMessage]="errorMessage()"
-    (fileSelected)="onFileSelected($event)"></app-upload-zone>
-
-  @if (enrichmentResult()) {
-  <app-enrichment-table [result]="enrichmentResult()"></app-enrichment-table>
-
-  <div class="step-actions">
-    <button class="next-button" (click)="goToStep(2)">{{ 'stepper.next' | translate }} →</button>
-  </div>
-  }
-  }
-
-  @if (currentStep() === 2) {
-  <div class="step-2-header">
-    <button class="back-button" (click)="goToStep(1)">← {{ 'stepper.back' | translate }}</button>
-
-    @if (!categorizationResult()) {
-    <button class="categorize-button" (click)="onCategorize()" [disabled]="isLoadingCategorization()">
-      {{ isLoadingCategorization() ? ('stepper.categorizing' | translate) : ('stepper.categorizeButton' | translate) }}
-    </button>
-    }
-  </div>
-
-  @if (errorMessage() && !categorizationResult()) {
-  <p class="error-message">{{ errorMessage() }}</p>
-  }
-
-  @if (categorizationResult()) {
-  <app-categorization-table [result]="categorizationResult()"></app-categorization-table>
-
-  <div class="step-actions">
-    <button class="next-button" (click)="goToStep(3)">{{ 'stepper.next' | translate }} →</button>
-  </div>
-  }
-  }
-
-  @if (currentStep() === 3 || currentStep() === 4) {
-  <div class="step-2-header">
-    <button class="back-button" (click)="goToStep(currentStep() - 1)">← {{ 'stepper.back' | translate }}</button>
-  </div>
-  <p class="placeholder-note">{{ 'stepper.placeholder' | translate }}</p>
-  }
-</main>
+<div class="shell">
+  <app-sidebar></app-sidebar>
+  <main>
+    <router-outlet></router-outlet>
+  </main>
+</div>

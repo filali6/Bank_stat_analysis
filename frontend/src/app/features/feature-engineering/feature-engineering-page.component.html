@@ -1,0 +1,53 @@
+@if (!session.categorizationResult()) {
+<p class="placeholder-note">{{ 'featureEngineering.needCategorizationFirst' | translate }}</p>
+} @else {
+<div class="back-row">
+    <button class="back-link-btn" (click)="goBack()">← {{ 'stepper.back' | translate }}</button>
+
+    @if (!session.clientFeatures()) {
+    <button class="categorize-button" (click)="onCompute()" [disabled]="session.isLoadingFeatures()">
+        {{ session.isLoadingFeatures() ? ('featureEngineering.computing' | translate) :
+        ('featureEngineering.computeButton' | translate) }}
+    </button>
+    }
+</div>
+
+@if (session.errorMessage() && !session.clientFeatures()) {
+<p class="error-message">{{ session.errorMessage() }}</p>
+}
+
+@if (session.clientFeatures(); as features) {
+<section class="results">
+    <div class="metric-grid">
+        <div class="metric-card">
+            <p class="label">{{ 'featureEngineering.monthlyIncome' | translate }}</p>
+            <p class="value">{{ features.monthly_income | number: '1.0-2' }} $</p>
+        </div>
+        <div class="metric-card">
+            <p class="label">{{ 'featureEngineering.savingsRate' | translate }}</p>
+            <p class="value">{{ features.savings_rate }}%</p>
+        </div>
+        <div class="metric-card">
+            <p class="label">{{ 'featureEngineering.travelRatio' | translate }}</p>
+            <p class="value">{{ features.travel_spend_ratio }}%</p>
+        </div>
+        <div class="metric-card">
+            <p class="label">{{ 'featureEngineering.groceryRatio' | translate }}</p>
+            <p class="value">{{ features.grocery_spend_ratio }}%</p>
+        </div>
+        <div class="metric-card">
+            <p class="label">{{ 'featureEngineering.recurringCommitments' | translate }}</p>
+            <p class="value">{{ features.recurring_commitments | number: '1.0-2' }} $</p>
+        </div>
+        <div class="metric-card">
+            <p class="label">{{ 'featureEngineering.atmRatio' | translate }}</p>
+            <p class="value">{{ features.atm_withdrawal_ratio }}%</p>
+        </div>
+    </div>
+</section>
+
+<div class="step-actions">
+    <button class="next-button" (click)="goNext()">{{ 'stepper.next' | translate }} →</button>
+</div>
+}
+}

@@ -2,12 +2,6 @@ import { Signal, computed, signal } from '@angular/core';
 
 const DEFAULT_PAGE_SIZE = 10;
 
-/**
- * Search + pagination behavior shared by every results table in the
- * app. Deliberately NOT an Angular service (no @Injectable) — each
- * table component creates its own instance, so state never leaks
- * between the Enrichment table and the Categorization table.
- */
 export class PaginatedListController<T> {
   private readonly items = signal<T[]>([]);
 

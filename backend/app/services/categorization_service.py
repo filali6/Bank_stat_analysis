@@ -1,4 +1,4 @@
-from typing import List, Optional, Tuple
+from typing import List, Tuple
 
 import numpy as np
 import pandas as pd
@@ -15,11 +15,10 @@ DICTIONARY_CONFIDENCE = 0.99
 
 
 class CategorizationService:
-    """Ensemble classification: if the merchant's category is already
-    known with certainty from merchant_db.json, use it directly (fast,
-    reliable). Otherwise, ask the trained ML models to guess — this is
-    the same "known dictionary first, ML as fallback" principle already
-    used in EnrichmentService's matcher chain, applied one level up.
+    """Ensemble classification: known merchant → dictionary. Unknown
+    merchant → ML. category_subcategory is predicted as ONE combined
+    target (not two separate models) so the model can never invent a
+    combination it has never actually seen (e.g. "Food · Electronics").
     """
 
     def __init__(
@@ -45,7 +44,7 @@ class CategorizationService:
             for i in range(len(transactions))
         ]
 
-        return CategorizationResponse(total=len(categorized), transactions=categorized)
+        return self._build_response(categorized)
 
     def _categorize_one(self, txn: EnrichedTransaction, feature_row) -> CategorizedTransaction:
         libelle_norm = normalize_text(txn.libelle_brut)
@@ -56,15 +55,11 @@ class CategorizationService:
             business_purpose, lifestyle_tag = self._business_lifestyle.get_labels(category, subcategory)
             confidence = DICTIONARY_CONFIDENCE
         else:
-            category, cat_conf = self._predict("category", feature_row)
-            subcategory, sub_conf = self._predict("subcategory", feature_row)
+            combo, combo_conf = self._predict("category_subcategory", feature_row)
+            category, subcategory = self._split_combo(combo)
+            business_purpose, bp_conf = self._predict("business_purpose", feature_row)
             lifestyle_tag, lt_conf = self._predict("lifestyle_tag", feature_row)
-            # business_purpose has no real variation in our training data yet
-            # (always "Personal") — kept as an honest constant rather than a
-            # fake ML prediction. Revisit once training data includes
-            # professional transactions.
-            business_purpose = "Personal"
-            confidence = min(cat_conf, sub_conf, lt_conf)
+            confidence = min(combo_conf, bp_conf, lt_conf)
 
         return CategorizedTransaction(
             **txn.model_dump(),
@@ -74,6 +69,13 @@ class CategorizationService:
             lifestyle_tag=lifestyle_tag,
             confidence=round(confidence, 4),
         )
+
+    def _split_combo(self, combo: str) -> Tuple[str, str]:
+        separator = self._models.combo_separator
+        if separator in combo:
+            category, subcategory = combo.split(separator, 1)
+            return category, subcategory
+        return combo, "Unknown"
 
     def _predict(self, target: str, feature_row) -> Tuple[str, float]:
         entry = self._models.get_model_entry(target)
@@ -85,3 +87,7 @@ class CategorizationService:
         best_index = int(np.argmax(proba))
         label = entry["label_encoder"].inverse_transform([best_index])[0]
         return label, float(proba[best_index])
+
+    @staticmethod
+    def _build_response(categorized: List[CategorizedTransaction]) -> CategorizationResponse:
+        return CategorizationResponse(total=len(categorized), transactions=categorized)

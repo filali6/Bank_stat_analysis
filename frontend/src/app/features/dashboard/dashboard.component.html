@@ -1,0 +1,34 @@
+<div class="page">
+  <p class="eyebrow">{{ 'dashboard.eyebrow' | translate }}</p>
+  <h1>{{ 'dashboard.title' | translate }}</h1>
+  <p class="subtitle">{{ 'dashboard.subtitle' | translate }}</p>
+
+  <div class="stats-grid">
+    <div class="stat-card"><p class="stat-label">{{ 'dashboard.statTotal' | translate }}</p><p class="stat-value">{{ totalCount }}</p></div>
+    <div class="stat-card"><p class="stat-label">{{ 'dashboard.statPending' | translate }}</p><p class="stat-value">{{ pendingCount }}</p></div>
+    <div class="stat-card"><p class="stat-label">{{ 'dashboard.statValidated' | translate }}</p><p class="stat-value">{{ validatedCount }}</p></div>
+  </div>
+
+  <button class="new-study-button" (click)="newStudy()">+ {{ 'dashboard.newStudy' | translate }}</button>
+
+  <table>
+    <thead>
+      <tr>
+        <th>{{ 'dashboard.tableClient' | translate }}</th>
+        <th>{{ 'dashboard.tableDate' | translate }}</th>
+        <th>{{ 'dashboard.tableOutput' | translate }}</th>
+        <th>{{ 'dashboard.tableStatus' | translate }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (s of studies; track s.client) {
+        <tr>
+          <td>{{ s.client }}</td>
+          <td>{{ s.date }}</td>
+          <td>{{ s.output }}</td>
+          <td><span class="status-pill" [class]="'status-' + s.status">{{ ('dashboard.status.' + s.status) | translate }}</span></td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

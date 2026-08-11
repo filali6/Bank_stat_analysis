@@ -10,6 +10,7 @@ from app.services.merchant_identifier import MerchantIdentifier
 from app.repositories.business_lifestyle_repository import BusinessLifestyleRepository
 from app.repositories.category_model_repository import CategoryModelRepository
 from app.services.categorization_service import CategorizationService
+from app.services.feature_engineering_service import FeatureEngineeringService
 
 """This is the ONE place in the codebase where concrete classes are
 wired together. Everywhere else, code depends on the Matcher interface
@@ -60,3 +61,6 @@ def get_categorization_service() -> CategorizationService:
         business_lifestyle_repository=get_business_lifestyle_repository(),
         category_model_repository=get_category_model_repository(),
     )
+@lru_cache
+def get_feature_engineering_service() -> FeatureEngineeringService:
+    return FeatureEngineeringService()

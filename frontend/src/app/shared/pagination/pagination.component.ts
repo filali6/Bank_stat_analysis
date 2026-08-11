@@ -12,8 +12,6 @@ export class PaginationComponent {
 
   @Output() pageChange = new EventEmitter<number>();
 
-  /** Windowed page list (1 ... current-1 current current+1 ... last), avoids
-   * showing 50 page buttons when there are many pages. */
   get pages(): (number | 'ellipsis')[] {
     const total = this.totalPages;
     const current = this.currentPage;

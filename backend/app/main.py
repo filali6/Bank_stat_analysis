@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-
+from app.api.feature_engineering_routes import router as feature_engineering_router
 from app.api.categorization_routes import router as categorization_router
 from app.api.enrichment_routes import router as enrichment_router
 from app.core.config import settings
@@ -17,6 +17,7 @@ app.add_middleware(
 
 app.include_router(enrichment_router)
 app.include_router(categorization_router)
+app.include_router(feature_engineering_router)
 
 
 @app.get("/health", tags=["health"])

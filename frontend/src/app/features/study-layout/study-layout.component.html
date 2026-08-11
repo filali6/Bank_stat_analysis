@@ -1,0 +1,6 @@
+<div class="study-topbar">
+    <a class="back-link" routerLink="/dashboard">← {{ 'sidebar.backToDashboard' | translate }}</a>
+    <app-stepper class="topbar-stepper" orientation="horizontal" [steps]="steps()" [currentStep]="currentStep()"
+        (stepClick)="onStepClick($event)"></app-stepper>
+</div>
+<router-outlet></router-outlet>

@@ -1,60 +1,1069 @@
 {
   "merchants": [
-    { "name": "Amazon", "patterns": ["AMZN", "AMAZON"], "category": "Shopping", "subcategory": "E-commerce", "channel": "Card Online", "type": "Purchase", "recurring": false, "income": false },
-    { "name": "Amazon Prime", "patterns": ["AMZN PRIME", "AMAZON PRIME", "PRIME"], "category": "Subscription", "subcategory": "Streaming", "channel": "Card Online", "type": "Subscription", "recurring": true, "income": false },
-    { "name": "eBay", "patterns": ["EBAY"], "category": "Shopping", "subcategory": "E-commerce", "channel": "Card Online", "type": "Purchase", "recurring": false, "income": false },
-    { "name": "Etsy", "patterns": ["ETSY"], "category": "Shopping", "subcategory": "E-commerce", "channel": "Card Online", "type": "Purchase", "recurring": false, "income": false },
-    { "name": "Netflix", "patterns": ["NETFLIX", "NFLX"], "category": "Entertainment", "subcategory": "Streaming", "channel": "Card Online", "type": "Subscription", "recurring": true, "income": false },
-    { "name": "Spotify", "patterns": ["SPOTIFY", "SPTFY"], "category": "Entertainment", "subcategory": "Music", "channel": "Card Online", "type": "Subscription", "recurring": true, "income": false },
-    { "name": "Disney+", "patterns": ["DISNEY PLUS", "DISNEY"], "category": "Entertainment", "subcategory": "Streaming", "channel": "Card Online", "type": "Subscription", "recurring": true, "income": false },
-    { "name": "Apple", "patterns": ["APPLE.COM", "APPLE COM"], "category": "Entertainment", "subcategory": "Apps", "channel": "Card Online", "type": "Subscription", "recurring": true, "income": false },
-    { "name": "Hulu", "patterns": ["HULU"], "category": "Entertainment", "subcategory": "Streaming", "channel": "Card Online", "type": "Subscription", "recurring": true, "income": false },
-    { "name": "HBO Max", "patterns": ["HBO MAX", "HBOMAX"], "category": "Entertainment", "subcategory": "Streaming", "channel": "Card Online", "type": "Subscription", "recurring": true, "income": false },
-    { "name": "YouTube Premium", "patterns": ["YOUTUBE PREMIUM"], "category": "Entertainment", "subcategory": "Streaming", "channel": "Card Online", "type": "Subscription", "recurring": true, "income": false },
-    { "name": "Steam", "patterns": ["STEAM"], "category": "Entertainment", "subcategory": "Gaming", "channel": "Card Online", "type": "Purchase", "recurring": false, "income": false },
-    { "name": "PlayStation", "patterns": ["PLAYSTATION"], "category": "Entertainment", "subcategory": "Gaming", "channel": "Card Online", "type": "Subscription", "recurring": true, "income": false },
-    { "name": "Xbox", "patterns": ["XBOX"], "category": "Entertainment", "subcategory": "Gaming", "channel": "Card Online", "type": "Subscription", "recurring": true, "income": false },
-    { "name": "Walmart", "patterns": ["WALMART", "WAL-MART", "WMT"], "category": "Groceries", "subcategory": "Supermarket", "channel": "Card POS", "type": "Purchase", "recurring": false, "income": false },
-    { "name": "Target", "patterns": ["TARGET"], "category": "Groceries", "subcategory": "Supermarket", "channel": "Card POS", "type": "Purchase", "recurring": false, "income": false },
-    { "name": "Costco", "patterns": ["COSTCO"], "category": "Groceries", "subcategory": "Supermarket", "channel": "Card POS", "type": "Purchase", "recurring": false, "income": false },
-    { "name": "Whole Foods", "patterns": ["WHOLE FOODS", "WHOLEFDS"], "category": "Groceries", "subcategory": "Supermarket", "channel": "Card POS", "type": "Purchase", "recurring": false, "income": false },
-    { "name": "Kroger", "patterns": ["KROGER"], "category": "Groceries", "subcategory": "Supermarket", "channel": "Card POS", "type": "Purchase", "recurring": false, "income": false },
-    { "name": "Instacart", "patterns": ["INSTACART"], "category": "Groceries", "subcategory": "Delivery", "channel": "Card Online", "type": "Purchase", "recurring": false, "income": false },
-    { "name": "McDonald's", "patterns": ["MCDONALD", "MCD"], "category": "Food", "subcategory": "Fast Food", "channel": "Card POS", "type": "Purchase", "recurring": false, "income": false },
-    { "name": "Starbucks", "patterns": ["STARBUCKS", "STRBCKS"], "category": "Food", "subcategory": "Coffee", "channel": "Card POS", "type": "Purchase", "recurring": false, "income": false },
-    { "name": "Uber Eats", "patterns": ["UBER EATS", "UBEREATS"], "category": "Food", "subcategory": "Delivery", "channel": "Card Online", "type": "Purchase", "recurring": false, "income": false },
-    { "name": "DoorDash", "patterns": ["DOORDASH"], "category": "Food", "subcategory": "Delivery", "channel": "Card Online", "type": "Purchase", "recurring": false, "income": false },
-    { "name": "Chipotle", "patterns": ["CHIPOTLE"], "category": "Food", "subcategory": "Restaurant", "channel": "Card POS", "type": "Purchase", "recurring": false, "income": false },
-    { "name": "Grubhub", "patterns": ["GRUBHUB"], "category": "Food", "subcategory": "Delivery", "channel": "Card Online", "type": "Purchase", "recurring": false, "income": false },
-    { "name": "Uber", "patterns": ["UBER*", "UBER "], "category": "Transport", "subcategory": "Rideshare", "channel": "Card Online", "type": "Purchase", "recurring": false, "income": false },
-    { "name": "Lyft", "patterns": ["LYFT"], "category": "Transport", "subcategory": "Rideshare", "channel": "Card Online", "type": "Purchase", "recurring": false, "income": false },
-    { "name": "Delta Airlines", "patterns": ["DELTA AIR"], "category": "Transport", "subcategory": "Flight", "channel": "Card Online", "type": "Purchase", "recurring": false, "income": false },
-    { "name": "Shell", "patterns": ["SHELL"], "category": "Transport", "subcategory": "Gas", "channel": "Card POS", "type": "Purchase", "recurring": false, "income": false },
-    { "name": "ATM", "patterns": ["ATM WITHDRAWAL", "CASH WITHDRAWAL"], "category": "Cash", "subcategory": "Withdrawal", "channel": "ATM", "type": "Withdrawal", "recurring": false, "income": false },
-    { "name": "Employer", "patterns": ["PAYROLL", "DIRECT DEP", "ACH DEPOSIT"], "category": "Income", "subcategory": "Salary", "channel": "Transfer", "type": "Income", "recurring": true, "income": true },
-    { "name": "Venmo", "patterns": ["VENMO"], "category": "Income", "subcategory": "Freelance", "channel": "Transfer", "type": "Income", "recurring": false, "income": true },
-    { "name": "PayPal", "patterns": ["PAYPAL"], "category": "Transfer", "subcategory": "P2P", "channel": "Transfer", "type": "Transfer", "recurring": false, "income": false },
-    { "name": "AT&T", "patterns": ["AT&T"], "category": "Bills", "subcategory": "Phone", "channel": "Transfer", "type": "Direct Debit", "recurring": true, "income": false },
-    { "name": "Verizon", "patterns": ["VERIZON"], "category": "Bills", "subcategory": "Phone", "channel": "Transfer", "type": "Direct Debit", "recurring": true, "income": false },
-    { "name": "Comcast", "patterns": ["COMCAST"], "category": "Bills", "subcategory": "Internet", "channel": "Transfer", "type": "Direct Debit", "recurring": true, "income": false },
-    { "name": "Con Edison", "patterns": ["CON EDISON"], "category": "Bills", "subcategory": "Electricity", "channel": "Transfer", "type": "Direct Debit", "recurring": true, "income": false },
-    { "name": "Landlord", "patterns": ["RENT PAYMENT", "RENT"], "category": "Housing", "subcategory": "Rent", "channel": "Transfer", "type": "Direct Debit", "recurring": true, "income": false },
-    { "name": "Planet Fitness", "patterns": ["PLANET FITNESS"], "category": "Health", "subcategory": "Gym", "channel": "Card POS", "type": "Subscription", "recurring": true, "income": false },
-    { "name": "Gold's Gym", "patterns": ["GOLDS GYM"], "category": "Health", "subcategory": "Gym", "channel": "Card POS", "type": "Subscription", "recurring": true, "income": false },
-    { "name": "CVS Pharmacy", "patterns": ["CVS"], "category": "Health", "subcategory": "Pharmacy", "channel": "Card POS", "type": "Purchase", "recurring": false, "income": false },
-    { "name": "Walgreens", "patterns": ["WALGREENS"], "category": "Health", "subcategory": "Pharmacy", "channel": "Card POS", "type": "Purchase", "recurring": false, "income": false },
-    { "name": "Geico", "patterns": ["GEICO"], "category": "Insurance", "subcategory": "Auto", "channel": "Transfer", "type": "Direct Debit", "recurring": true, "income": false },
-    { "name": "State Farm", "patterns": ["STATE FARM"], "category": "Insurance", "subcategory": "Home", "channel": "Transfer", "type": "Direct Debit", "recurring": true, "income": false },
-    { "name": "Best Buy", "patterns": ["BEST BUY"], "category": "Shopping", "subcategory": "Electronics", "channel": "Card POS", "type": "Purchase", "recurring": false, "income": false },
-    { "name": "Apple Store", "patterns": ["APPLE STORE"], "category": "Shopping", "subcategory": "Electronics", "channel": "Card POS", "type": "Purchase", "recurring": false, "income": false },
-    { "name": "Airbnb", "patterns": ["AIRBNB"], "category": "Travel", "subcategory": "Accommodation", "channel": "Card Online", "type": "Purchase", "recurring": false, "income": false },
-    { "name": "Booking.com", "patterns": ["BOOKING.COM", "BOOKING"], "category": "Travel", "subcategory": "Accommodation", "channel": "Card Online", "type": "Purchase", "recurring": false, "income": false },
-    { "name": "Expedia", "patterns": ["EXPEDIA"], "category": "Travel", "subcategory": "Flight", "channel": "Card Online", "type": "Purchase", "recurring": false, "income": false },
-    { "name": "Wire Transfer", "patterns": ["WIRE TRANSFER"], "category": "Transfer", "subcategory": "Wire", "channel": "Transfer", "type": "Transfer", "recurring": false, "income": false },
-    { "name": "Zelle", "patterns": ["ZELLE"], "category": "Transfer", "subcategory": "P2P", "channel": "Transfer", "type": "Transfer", "recurring": false, "income": false },
-    { "name": "Bank", "patterns": ["OVERDRAFT FEE"], "category": "Fees", "subcategory": "Overdraft", "channel": "Transfer", "type": "Fee", "recurring": false, "income": false },
-    { "name": "Bank", "patterns": ["MONTHLY FEE"], "category": "Fees", "subcategory": "Monthly Fee", "channel": "Transfer", "type": "Fee", "recurring": true, "income": false },
-    { "name": "Bank", "patterns": ["MORTGAGE PAYMENT"], "category": "Housing", "subcategory": "Mortgage", "channel": "Transfer", "type": "Direct Debit", "recurring": true, "income": false },
-    { "name": "Bank", "patterns": ["CAR LOAN PAYMENT"], "category": "Transport", "subcategory": "Car Loan", "channel": "Transfer", "type": "Direct Debit", "recurring": true, "income": false }
+    {
+      "name": "Amazon",
+      "patterns": [
+        "AMZN",
+        "AMAZON",
+        "AMAZN"
+      ],
+      "category": "Shopping",
+      "subcategory": "E-commerce",
+      "channel": "Card Online",
+      "type": "Purchase",
+      "recurring": false,
+      "income": false
+    },
+    {
+      "name": "Amazon Prime",
+      "patterns": [
+        "AMZN PRIME",
+        "AMAZON PRIME",
+        "PRIME"
+      ],
+      "category": "Subscription",
+      "subcategory": "Streaming",
+      "channel": "Card Online",
+      "type": "Subscription",
+      "recurring": true,
+      "income": false
+    },
+    {
+      "name": "eBay",
+      "patterns": [
+        "EBAY"
+      ],
+      "category": "Shopping",
+      "subcategory": "E-commerce",
+      "channel": "Card Online",
+      "type": "Purchase",
+      "recurring": false,
+      "income": false
+    },
+    {
+      "name": "Etsy",
+      "patterns": [
+        "ETSY"
+      ],
+      "category": "Shopping",
+      "subcategory": "E-commerce",
+      "channel": "Card Online",
+      "type": "Purchase",
+      "recurring": false,
+      "income": false
+    },
+    {
+      "name": "Netflix",
+      "patterns": [
+        "NETFLIX",
+        "NFLX*COM",
+        "NFLX COM"
+      ],
+      "category": "Entertainment",
+      "subcategory": "Streaming",
+      "channel": "Card Online",
+      "type": "Subscription",
+      "recurring": true,
+      "income": false
+    },
+    {
+      "name": "Spotify",
+      "patterns": [
+        "SPOTIFY",
+        "SPTFY",
+        "SP * SPOTIFY"
+      ],
+      "category": "Entertainment",
+      "subcategory": "Music",
+      "channel": "Card Online",
+      "type": "Subscription",
+      "recurring": true,
+      "income": false
+    },
+    {
+      "name": "Disney+",
+      "patterns": [
+        "DISNEY PLUS",
+        "DISNEY+"
+      ],
+      "category": "Entertainment",
+      "subcategory": "Streaming",
+      "channel": "Card Online",
+      "type": "Subscription",
+      "recurring": true,
+      "income": false
+    },
+    {
+      "name": "Apple",
+      "patterns": [
+        "APPLE.COM",
+        "APPLE COM",
+        "APPLE ITUNES"
+      ],
+      "category": "Entertainment",
+      "subcategory": "Apps",
+      "channel": "Card Online",
+      "type": "Subscription",
+      "recurring": true,
+      "income": false
+    },
+    {
+      "name": "Hulu",
+      "patterns": [
+        "HULU",
+        "HLU*"
+      ],
+      "category": "Entertainment",
+      "subcategory": "Streaming",
+      "channel": "Card Online",
+      "type": "Subscription",
+      "recurring": true,
+      "income": false
+    },
+    {
+      "name": "HBO Max",
+      "patterns": [
+        "HBO MAX",
+        "HBOMAX"
+      ],
+      "category": "Entertainment",
+      "subcategory": "Streaming",
+      "channel": "Card Online",
+      "type": "Subscription",
+      "recurring": true,
+      "income": false
+    },
+    {
+      "name": "YouTube Premium",
+      "patterns": [
+        "YOUTUBE PREMIUM"
+      ],
+      "category": "Entertainment",
+      "subcategory": "Streaming",
+      "channel": "Card Online",
+      "type": "Subscription",
+      "recurring": true,
+      "income": false
+    },
+    {
+      "name": "Steam",
+      "patterns": [
+        "STEAM"
+      ],
+      "category": "Entertainment",
+      "subcategory": "Gaming",
+      "channel": "Card Online",
+      "type": "Purchase",
+      "recurring": false,
+      "income": false
+    },
+    {
+      "name": "PlayStation",
+      "patterns": [
+        "PLAYSTATION"
+      ],
+      "category": "Entertainment",
+      "subcategory": "Gaming",
+      "channel": "Card Online",
+      "type": "Subscription",
+      "recurring": true,
+      "income": false
+    },
+    {
+      "name": "Xbox",
+      "patterns": [
+        "XBOX",
+        "MSFT *XBOX"
+      ],
+      "category": "Entertainment",
+      "subcategory": "Gaming",
+      "channel": "Card Online",
+      "type": "Subscription",
+      "recurring": true,
+      "income": false
+    },
+    {
+      "name": "Walmart",
+      "patterns": [
+        "WALMART",
+        "WAL-MART",
+        "WM SUPERCENTER",
+        "WMT"
+      ],
+      "category": "Groceries",
+      "subcategory": "Supermarket",
+      "channel": "Card POS",
+      "type": "Purchase",
+      "recurring": false,
+      "income": false
+    },
+    {
+      "name": "Target",
+      "patterns": [
+        "TARGET",
+        "TGT"
+      ],
+      "category": "Groceries",
+      "subcategory": "Supermarket",
+      "channel": "Card POS",
+      "type": "Purchase",
+      "recurring": false,
+      "income": false
+    },
+    {
+      "name": "Costco",
+      "patterns": [
+        "COSTCO"
+      ],
+      "category": "Groceries",
+      "subcategory": "Supermarket",
+      "channel": "Card POS",
+      "type": "Purchase",
+      "recurring": false,
+      "income": false
+    },
+    {
+      "name": "Whole Foods",
+      "patterns": [
+        "WHOLE FOODS",
+        "WHOLEFDS"
+      ],
+      "category": "Groceries",
+      "subcategory": "Supermarket",
+      "channel": "Card POS",
+      "type": "Purchase",
+      "recurring": false,
+      "income": false
+    },
+    {
+      "name": "Kroger",
+      "patterns": [
+        "KROGER"
+      ],
+      "category": "Groceries",
+      "subcategory": "Supermarket",
+      "channel": "Card POS",
+      "type": "Purchase",
+      "recurring": false,
+      "income": false
+    },
+    {
+      "name": "Instacart",
+      "patterns": [
+        "INSTACART"
+      ],
+      "category": "Groceries",
+      "subcategory": "Delivery",
+      "channel": "Card Online",
+      "type": "Purchase",
+      "recurring": false,
+      "income": false
+    },
+    {
+      "name": "McDonald's",
+      "patterns": [
+        "MCDONALD",
+        "MCDONALDS",
+        "MCD"
+      ],
+      "category": "Food",
+      "subcategory": "Fast Food",
+      "channel": "Card POS",
+      "type": "Purchase",
+      "recurring": false,
+      "income": false
+    },
+    {
+      "name": "Starbucks",
+      "patterns": [
+        "STARBUCKS",
+        "STRBCKS",
+        "SQ *STARBUCKS"
+      ],
+      "category": "Food",
+      "subcategory": "Coffee",
+      "channel": "Card POS",
+      "type": "Purchase",
+      "recurring": false,
+      "income": false
+    },
+    {
+      "name": "Uber Eats",
+      "patterns": [
+        "UBER EATS",
+        "UBEREATS",
+        "UE *FOOD"
+      ],
+      "category": "Food",
+      "subcategory": "Delivery",
+      "channel": "Card Online",
+      "type": "Purchase",
+      "recurring": false,
+      "income": false
+    },
+    {
+      "name": "DoorDash",
+      "patterns": [
+        "DOORDASH",
+        "DD *DELIVERY"
+      ],
+      "category": "Food",
+      "subcategory": "Delivery",
+      "channel": "Card Online",
+      "type": "Purchase",
+      "recurring": false,
+      "income": false
+    },
+    {
+      "name": "Chipotle",
+      "patterns": [
+        "CHIPOTLE"
+      ],
+      "category": "Food",
+      "subcategory": "Restaurant",
+      "channel": "Card POS",
+      "type": "Purchase",
+      "recurring": false,
+      "income": false
+    },
+    {
+      "name": "Grubhub",
+      "patterns": [
+        "GRUBHUB"
+      ],
+      "category": "Food",
+      "subcategory": "Delivery",
+      "channel": "Card Online",
+      "type": "Purchase",
+      "recurring": false,
+      "income": false
+    },
+    {
+      "name": "Uber",
+      "patterns": [
+        "UBER*",
+        "UBR"
+      ],
+      "category": "Transport",
+      "subcategory": "Rideshare",
+      "channel": "Card Online",
+      "type": "Purchase",
+      "recurring": false,
+      "income": false
+    },
+    {
+      "name": "Lyft",
+      "patterns": [
+        "LYFT"
+      ],
+      "category": "Transport",
+      "subcategory": "Rideshare",
+      "channel": "Card Online",
+      "type": "Purchase",
+      "recurring": false,
+      "income": false
+    },
+    {
+      "name": "Delta Airlines",
+      "patterns": [
+        "DELTA AIR"
+      ],
+      "category": "Transport",
+      "subcategory": "Flight",
+      "channel": "Card Online",
+      "type": "Purchase",
+      "recurring": false,
+      "income": false
+    },
+    {
+      "name": "Shell",
+      "patterns": [
+        "SHELL"
+      ],
+      "category": "Transport",
+      "subcategory": "Gas",
+      "channel": "Card POS",
+      "type": "Purchase",
+      "recurring": false,
+      "income": false
+    },
+    {
+      "name": "ATM",
+      "patterns": [
+        "ATM WITHDRAWAL",
+        "CASH WITHDRAWAL"
+      ],
+      "category": "Cash",
+      "subcategory": "Withdrawal",
+      "channel": "ATM",
+      "type": "Withdrawal",
+      "recurring": false,
+      "income": false
+    },
+    {
+      "name": "Employer",
+      "patterns": [
+        "PAYROLL",
+        "DIRECT DEP",
+        "ACH DEPOSIT SALARY"
+      ],
+      "category": "Income",
+      "subcategory": "Salary",
+      "channel": "Transfer",
+      "type": "Income",
+      "recurring": true,
+      "income": true
+    },
+    {
+      "name": "Venmo",
+      "patterns": [
+        "VENMO",
+        "VNM"
+      ],
+      "category": "Income",
+      "subcategory": "Freelance",
+      "channel": "Transfer",
+      "type": "Income",
+      "recurring": false,
+      "income": true
+    },
+    {
+      "name": "PayPal",
+      "patterns": [
+        "PAYPAL",
+        "PP*"
+      ],
+      "category": "Transfer",
+      "subcategory": "P2P",
+      "channel": "Transfer",
+      "type": "Transfer",
+      "recurring": false,
+      "income": false
+    },
+    {
+      "name": "AT&T",
+      "patterns": [
+        "AT&T"
+      ],
+      "category": "Bills",
+      "subcategory": "Phone",
+      "channel": "Transfer",
+      "type": "Direct Debit",
+      "recurring": true,
+      "income": false
+    },
+    {
+      "name": "Verizon",
+      "patterns": [
+        "VERIZON"
+      ],
+      "category": "Bills",
+      "subcategory": "Phone",
+      "channel": "Transfer",
+      "type": "Direct Debit",
+      "recurring": true,
+      "income": false
+    },
+    {
+      "name": "Comcast",
+      "patterns": [
+        "COMCAST"
+      ],
+      "category": "Bills",
+      "subcategory": "Internet",
+      "channel": "Transfer",
+      "type": "Direct Debit",
+      "recurring": true,
+      "income": false
+    },
+    {
+      "name": "Con Edison",
+      "patterns": [
+        "CON EDISON"
+      ],
+      "category": "Bills",
+      "subcategory": "Electricity",
+      "channel": "Transfer",
+      "type": "Direct Debit",
+      "recurring": true,
+      "income": false
+    },
+    {
+      "name": "Landlord",
+      "patterns": [
+        "RENT PAYMENT",
+        "RENT"
+      ],
+      "category": "Housing",
+      "subcategory": "Rent",
+      "channel": "Transfer",
+      "type": "Direct Debit",
+      "recurring": true,
+      "income": false
+    },
+    {
+      "name": "Planet Fitness",
+      "patterns": [
+        "PLANET FITNESS",
+        "PF *GYM"
+      ],
+      "category": "Health",
+      "subcategory": "Gym",
+      "channel": "Card POS",
+      "type": "Subscription",
+      "recurring": true,
+      "income": false
+    },
+    {
+      "name": "Gold's Gym",
+      "patterns": [
+        "GOLDS GYM",
+        "GOLD'S GYM"
+      ],
+      "category": "Health",
+      "subcategory": "Gym",
+      "channel": "Card POS",
+      "type": "Subscription",
+      "recurring": true,
+      "income": false
+    },
+    {
+      "name": "CVS Pharmacy",
+      "patterns": [
+        "CVS PHARMACY",
+        "CVS"
+      ],
+      "category": "Health",
+      "subcategory": "Pharmacy",
+      "channel": "Card POS",
+      "type": "Purchase",
+      "recurring": false,
+      "income": false
+    },
+    {
+      "name": "Walgreens",
+      "patterns": [
+        "WALGREENS"
+      ],
+      "category": "Health",
+      "subcategory": "Pharmacy",
+      "channel": "Card POS",
+      "type": "Purchase",
+      "recurring": false,
+      "income": false
+    },
+    {
+      "name": "Geico",
+      "patterns": [
+        "GEICO"
+      ],
+      "category": "Insurance",
+      "subcategory": "Auto",
+      "channel": "Transfer",
+      "type": "Direct Debit",
+      "recurring": true,
+      "income": false
+    },
+    {
+      "name": "State Farm",
+      "patterns": [
+        "STATE FARM"
+      ],
+      "category": "Insurance",
+      "subcategory": "Home",
+      "channel": "Transfer",
+      "type": "Direct Debit",
+      "recurring": true,
+      "income": false
+    },
+    {
+      "name": "Best Buy",
+      "patterns": [
+        "BEST BUY"
+      ],
+      "category": "Shopping",
+      "subcategory": "Electronics",
+      "channel": "Card POS",
+      "type": "Purchase",
+      "recurring": false,
+      "income": false
+    },
+    {
+      "name": "Apple Store",
+      "patterns": [
+        "APPLE STORE"
+      ],
+      "category": "Shopping",
+      "subcategory": "Electronics",
+      "channel": "Card POS",
+      "type": "Purchase",
+      "recurring": false,
+      "income": false
+    },
+    {
+      "name": "Airbnb",
+      "patterns": [
+        "AIRBNB"
+      ],
+      "category": "Travel",
+      "subcategory": "Accommodation",
+      "channel": "Card Online",
+      "type": "Purchase",
+      "recurring": false,
+      "income": false
+    },
+    {
+      "name": "Booking.com",
+      "patterns": [
+        "BOOKING.COM",
+        "BOOKING"
+      ],
+      "category": "Travel",
+      "subcategory": "Accommodation",
+      "channel": "Card Online",
+      "type": "Purchase",
+      "recurring": false,
+      "income": false
+    },
+    {
+      "name": "Expedia",
+      "patterns": [
+        "EXPEDIA"
+      ],
+      "category": "Travel",
+      "subcategory": "Flight",
+      "channel": "Card Online",
+      "type": "Purchase",
+      "recurring": false,
+      "income": false
+    },
+    {
+      "name": "Wire Transfer",
+      "patterns": [
+        "WIRE TRANSFER"
+      ],
+      "category": "Transfer",
+      "subcategory": "Wire",
+      "channel": "Transfer",
+      "type": "Transfer",
+      "recurring": false,
+      "income": false
+    },
+    {
+      "name": "Zelle",
+      "patterns": [
+        "ZELLE"
+      ],
+      "category": "Transfer",
+      "subcategory": "P2P",
+      "channel": "Transfer",
+      "type": "Transfer",
+      "recurring": false,
+      "income": false
+    },
+    {
+      "name": "Savings",
+      "patterns": [
+        "TRANSFER TO SAVINGS"
+      ],
+      "category": "Savings",
+      "subcategory": "Transfer",
+      "channel": "Transfer",
+      "type": "Transfer",
+      "recurring": true,
+      "income": false
+    },
+    {
+      "name": "Bank",
+      "patterns": [
+        "OVERDRAFT FEE"
+      ],
+      "category": "Fees",
+      "subcategory": "Overdraft",
+      "channel": "Transfer",
+      "type": "Fee",
+      "recurring": false,
+      "income": false
+    },
+    {
+      "name": "Bank",
+      "patterns": [
+        "MONTHLY FEE"
+      ],
+      "category": "Fees",
+      "subcategory": "Monthly Fee",
+      "channel": "Transfer",
+      "type": "Fee",
+      "recurring": true,
+      "income": false
+    },
+    {
+      "name": "Bank",
+      "patterns": [
+        "MORTGAGE PAYMENT"
+      ],
+      "category": "Housing",
+      "subcategory": "Mortgage",
+      "channel": "Transfer",
+      "type": "Direct Debit",
+      "recurring": true,
+      "income": false
+    },
+    {
+      "name": "Bank",
+      "patterns": [
+        "CAR LOAN PAYMENT"
+      ],
+      "category": "Transport",
+      "subcategory": "Car Loan",
+      "channel": "Transfer",
+      "type": "Direct Debit",
+      "recurring": true,
+      "income": false
+    },
+    {
+      "name": "Amazon",
+      "patterns": [
+        "AMAZON REFUND"
+      ],
+      "category": "Refund",
+      "subcategory": "E-commerce",
+      "channel": "Card Online",
+      "type": "Refund",
+      "recurring": false,
+      "income": false
+    },
+    {
+      "name": "Unknown",
+      "patterns": [
+        "REFUND"
+      ],
+      "category": "Refund",
+      "subcategory": "General",
+      "channel": "Card Online",
+      "type": "Refund",
+      "recurring": false,
+      "income": false
+    },
+    {
+      "name": "T-Mobile",
+      "patterns": [
+        "T-MOBILE",
+        "TMOBILE"
+      ],
+      "category": "Bills",
+      "subcategory": "Phone",
+      "channel": "Transfer",
+      "type": "Direct Debit",
+      "recurring": true,
+      "income": false
+    },
+    {
+      "name": "Sprint",
+      "patterns": [
+        "SPRINT"
+      ],
+      "category": "Bills",
+      "subcategory": "Phone",
+      "channel": "Transfer",
+      "type": "Direct Debit",
+      "recurring": true,
+      "income": false
+    },
+    {
+      "name": "Progressive",
+      "patterns": [
+        "PROGRESSIVE"
+      ],
+      "category": "Insurance",
+      "subcategory": "Auto",
+      "channel": "Transfer",
+      "type": "Direct Debit",
+      "recurring": true,
+      "income": false
+    },
+    {
+      "name": "Allstate",
+      "patterns": [
+        "ALLSTATE"
+      ],
+      "category": "Insurance",
+      "subcategory": "Home",
+      "channel": "Transfer",
+      "type": "Direct Debit",
+      "recurring": true,
+      "income": false
+    },
+    {
+      "name": "Blue Cross",
+      "patterns": [
+        "BLUE CROSS",
+        "BCBS"
+      ],
+      "category": "Insurance",
+      "subcategory": "Health",
+      "channel": "Transfer",
+      "type": "Direct Debit",
+      "recurring": true,
+      "income": false
+    },
+    {
+      "name": "Southwest",
+      "patterns": [
+        "SOUTHWEST AIR",
+        "SOUTHWEST"
+      ],
+      "category": "Transport",
+      "subcategory": "Flight",
+      "channel": "Card Online",
+      "type": "Purchase",
+      "recurring": false,
+      "income": false
+    },
+    {
+      "name": "American Airlines",
+      "patterns": [
+        "AMERICAN AIR",
+        "AA.COM"
+      ],
+      "category": "Transport",
+      "subcategory": "Flight",
+      "channel": "Card Online",
+      "type": "Purchase",
+      "recurring": false,
+      "income": false
+    },
+    {
+      "name": "United Airlines",
+      "patterns": [
+        "UNITED AIR",
+        "UNITED.COM"
+      ],
+      "category": "Transport",
+      "subcategory": "Flight",
+      "channel": "Card Online",
+      "type": "Purchase",
+      "recurring": false,
+      "income": false
+    },
+    {
+      "name": "Exxon",
+      "patterns": [
+        "EXXON",
+        "EXXONMOBIL"
+      ],
+      "category": "Transport",
+      "subcategory": "Gas",
+      "channel": "Card POS",
+      "type": "Purchase",
+      "recurring": false,
+      "income": false
+    },
+    {
+      "name": "Chevron",
+      "patterns": [
+        "CHEVRON"
+      ],
+      "category": "Transport",
+      "subcategory": "Gas",
+      "channel": "Card POS",
+      "type": "Purchase",
+      "recurring": false,
+      "income": false
+    },
+    {
+      "name": "Subway",
+      "patterns": [
+        "SUBWAY"
+      ],
+      "category": "Food",
+      "subcategory": "Fast Food",
+      "channel": "Card POS",
+      "type": "Purchase",
+      "recurring": false,
+      "income": false
+    },
+    {
+      "name": "Wendy's",
+      "patterns": [
+        "WENDYS",
+        "WENDY'S"
+      ],
+      "category": "Food",
+      "subcategory": "Fast Food",
+      "channel": "Card POS",
+      "type": "Purchase",
+      "recurring": false,
+      "income": false
+    },
+    {
+      "name": "Dunkin",
+      "patterns": [
+        "DUNKIN"
+      ],
+      "category": "Food",
+      "subcategory": "Coffee",
+      "channel": "Card POS",
+      "type": "Purchase",
+      "recurring": false,
+      "income": false
+    },
+    {
+      "name": "Panera Bread",
+      "patterns": [
+        "PANERA"
+      ],
+      "category": "Food",
+      "subcategory": "Restaurant",
+      "channel": "Card POS",
+      "type": "Purchase",
+      "recurring": false,
+      "income": false
+    },
+    {
+      "name": "LA Fitness",
+      "patterns": [
+        "LA FITNESS"
+      ],
+      "category": "Health",
+      "subcategory": "Gym",
+      "channel": "Card POS",
+      "type": "Subscription",
+      "recurring": true,
+      "income": false
+    },
+    {
+      "name": "Equinox",
+      "patterns": [
+        "EQUINOX"
+      ],
+      "category": "Health",
+      "subcategory": "Gym",
+      "channel": "Card POS",
+      "type": "Subscription",
+      "recurring": true,
+      "income": false
+    },
+    {
+      "name": "Peloton",
+      "patterns": [
+        "PELOTON"
+      ],
+      "category": "Health",
+      "subcategory": "Fitness",
+      "channel": "Card Online",
+      "type": "Subscription",
+      "recurring": true,
+      "income": false
+    },
+    {
+      "name": "Adobe",
+      "patterns": [
+        "ADOBE"
+      ],
+      "category": "Subscription",
+      "subcategory": "Software",
+      "channel": "Card Online",
+      "type": "Subscription",
+      "recurring": true,
+      "income": false
+    },
+    {
+      "name": "iCloud",
+      "patterns": [
+        "ICLOUD"
+      ],
+      "category": "Subscription",
+      "subcategory": "Storage",
+      "channel": "Card Online",
+      "type": "Subscription",
+      "recurring": true,
+      "income": false
+    },
+    {
+      "name": "Audible",
+      "patterns": [
+        "AUDIBLE"
+      ],
+      "category": "Entertainment",
+      "subcategory": "Books",
+      "channel": "Card Online",
+      "type": "Subscription",
+      "recurring": true,
+      "income": false
+    },
+    {
+      "name": "IKEA",
+      "patterns": [
+        "IKEA"
+      ],
+      "category": "Shopping",
+      "subcategory": "Furniture",
+      "channel": "Card POS",
+      "type": "Purchase",
+      "recurring": false,
+      "income": false
+    },
+    {
+      "name": "Home Depot",
+      "patterns": [
+        "HOME DEPOT"
+      ],
+      "category": "Shopping",
+      "subcategory": "Home Improvement",
+      "channel": "Card POS",
+      "type": "Purchase",
+      "recurring": false,
+      "income": false
+    },
+    {
+      "name": "Lowe's",
+      "patterns": [
+        "LOWES",
+        "LOWE'S"
+      ],
+      "category": "Shopping",
+      "subcategory": "Home Improvement",
+      "channel": "Card POS",
+      "type": "Purchase",
+      "recurring": false,
+      "income": false
+    },
+    {
+      "name": "Fidelity",
+      "patterns": [
+        "FIDELITY"
+      ],
+      "category": "Savings",
+      "subcategory": "Investment",
+      "channel": "Transfer",
+      "type": "Transfer",
+      "recurring": false,
+      "income": false
+    },
+    {
+      "name": "Robinhood",
+      "patterns": [
+        "ROBINHOOD"
+      ],
+      "category": "Savings",
+      "subcategory": "Investment",
+      "channel": "Transfer",
+      "type": "Transfer",
+      "recurring": false,
+      "income": false
+    },
+    {
+      "name": "Sallie Mae",
+      "patterns": [
+        "SALLIE MAE"
+      ],
+      "category": "Education",
+      "subcategory": "Student Loan",
+      "channel": "Transfer",
+      "type": "Direct Debit",
+      "recurring": true,
+      "income": false
+    }
   ]
 }

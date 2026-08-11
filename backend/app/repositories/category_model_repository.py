@@ -28,8 +28,12 @@ class CategoryModelRepository:
     def feature_columns(self):
         return self._get_bundle()["feature_columns"]
 
+    @property
+    def combo_separator(self) -> str:
+        return self._get_bundle().get("combo_separator", " · ")
+
     def get_model_entry(self, target: str) -> Dict[str, Any]:
         """Returns {'model': ..., 'label_encoder': ..., 'constant_value': ...}
-        for a given target ('category', 'subcategory', 'lifestyle_tag').
+        for a given target ('category_subcategory', 'business_purpose', 'lifestyle_tag').
         """
         return self._get_bundle()["targets"][target]
