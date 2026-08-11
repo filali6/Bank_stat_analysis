@@ -1,0 +1,10 @@
+.step-actions { max-width: 1160px; margin: 0 auto; padding: 4px 24px 48px; display: flex; justify-content: flex-end; }
+.back-row { max-width: 1160px; margin: 0 auto; padding: 20px 24px 16px; display: flex; align-items: center; justify-content: space-between; }
+.back-link-btn { background: none; border: none; color: #4f46e5; font-size: 13px; font-weight: 600; cursor: pointer; padding: 0; }
+.next-button, .categorize-button {
+  background: #4f46e5; border: none; color: #fff; font-size: 13.5px; font-weight: 600;
+  padding: 10px 20px; border-radius: 9px; cursor: pointer;
+}
+.next-button:disabled, .categorize-button:disabled { opacity: 0.6; cursor: not-allowed; }
+.error-message { max-width: 1160px; margin: 0 auto; padding: 0 24px 16px; color: #b42318; font-size: 13.5px; }
+.placeholder-note { text-align: center; color: #9ca3af; font-size: 13.5px; padding: 80px 24px; }

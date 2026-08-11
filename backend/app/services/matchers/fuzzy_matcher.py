@@ -8,10 +8,7 @@ from app.services.matchers.base_matcher import Matcher
 
 
 class FuzzyMatcher(Matcher):
-    """Level 2: tolerant to typos and truncated labels (e.g. "NTFLX"
-    instead of "NETFLIX"). Only runs when ExactMatcher has already
-    failed — it's slower since it compares against every known pattern.
-    """
+  
 
     def __init__(self, repository: MerchantRepository, threshold: int = 80):
         self._repository = repository

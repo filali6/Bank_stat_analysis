@@ -1,0 +1,12 @@
+<app-upload-zone
+  [isLoading]="session.isLoadingEnrichment()"
+  [errorMessage]="session.errorMessage()"
+  (fileSelected)="onFileSelected($event)"
+></app-upload-zone>
+
+@if (session.enrichmentResult()) {
+  <app-enrichment-table [result]="session.enrichmentResult()"></app-enrichment-table>
+  <div class="step-actions">
+    <button class="next-button" (click)="goNext()">{{ 'stepper.next' | translate }} →</button>
+  </div>
+}

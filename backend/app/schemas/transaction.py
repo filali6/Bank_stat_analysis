@@ -40,16 +40,11 @@ class EnrichedTransaction(BaseModel):
     libelle_brut: str
     montant: float
     merchant: str
-    category: str
-    subcategory: str
     payment_channel: str
     transaction_type: str
     recurring: bool
     income_flag: bool
     normalized_description: str
-    confidence: int
-    status: str
-    matched_by: Optional[str] = None
 
 
 class EnrichmentResponse(BaseModel):
@@ -59,8 +54,39 @@ class EnrichmentResponse(BaseModel):
     """
 
     total: int
-    validated: int
-    review: int
-    unknown: int
-    average_confidence: float
     transactions: List[EnrichedTransaction]
+class CategorizedTransaction(EnrichedTransaction):
+    """Extends EnrichedTransaction with the Categorization step's
+    outputs — matches the schema's second stage exactly."""
+
+    category: str
+    subcategory: str
+    business_purpose: str
+    lifestyle_tag: str
+    confidence: float
+
+
+class CategorizationResponse(BaseModel):
+    total: int
+    transactions: List[CategorizedTransaction]
+    
+
+class ClientFeatures(BaseModel):
+    """The 6 outputs of the Feature Engineering step — pure statistics
+    computed over a client's full categorized transaction history, no
+    machine learning involved (unlike Categorization)."""
+
+    monthly_income: float
+    savings_rate: float
+    travel_spend_ratio: float
+    grocery_spend_ratio: float
+    recurring_commitments: float
+    atm_withdrawal_ratio: float
+    
+
+class CategorizedTransactionsInput(BaseModel):
+    """Wraps a list of already-categorized transactions — used to CHAIN
+    Feature Engineering onto the previous step's result, instead of
+    re-running Enrichment+Categorization from scratch."""
+
+    transactions: List[CategorizedTransaction]

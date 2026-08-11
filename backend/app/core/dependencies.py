@@ -7,6 +7,10 @@ from app.services.matchers.exact_matcher import ExactMatcher
 from app.services.matchers.fuzzy_matcher import FuzzyMatcher
 from app.services.matchers.tfidf_matcher import TfidfMatcher
 from app.services.merchant_identifier import MerchantIdentifier
+from app.repositories.business_lifestyle_repository import BusinessLifestyleRepository
+from app.repositories.category_model_repository import CategoryModelRepository
+from app.services.categorization_service import CategorizationService
+from app.services.feature_engineering_service import FeatureEngineeringService
 
 """This is the ONE place in the codebase where concrete classes are
 wired together. Everywhere else, code depends on the Matcher interface
@@ -39,3 +43,24 @@ def get_merchant_identifier() -> MerchantIdentifier:
 @lru_cache
 def get_enrichment_service() -> EnrichmentService:
     return EnrichmentService(get_merchant_identifier())
+
+@lru_cache
+def get_business_lifestyle_repository() -> BusinessLifestyleRepository:
+    return BusinessLifestyleRepository(settings.business_lifestyle_mapping_path)
+
+
+@lru_cache
+def get_category_model_repository() -> CategoryModelRepository:
+    return CategoryModelRepository(settings.category_model_bundle_path)
+
+
+@lru_cache
+def get_categorization_service() -> CategorizationService:
+    return CategorizationService(
+        merchant_repository=get_merchant_repository(),
+        business_lifestyle_repository=get_business_lifestyle_repository(),
+        category_model_repository=get_category_model_repository(),
+    )
+@lru_cache
+def get_feature_engineering_service() -> FeatureEngineeringService:
+    return FeatureEngineeringService()

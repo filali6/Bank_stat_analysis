@@ -1,0 +1,33 @@
+@import '../../shared/styles/step-actions.css';
+
+.results {
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 0 24px 24px;
+}
+
+.metric-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.metric-card {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 18px;
+}
+
+.metric-card .label {
+    font-size: 11.5px;
+    color: #9ca3af;
+    margin: 0 0 6px;
+}
+
+.metric-card .value {
+    font-size: 20px;
+    font-weight: 700;
+    color: #111827;
+    margin: 0;
+}

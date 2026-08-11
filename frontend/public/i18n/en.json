@@ -1,0 +1,95 @@
+{
+  "header": { "title": "Bank Statement Analyzer" },
+  "sidebar": {
+    "prototypeBadge": "Demo",
+    "dashboard": "Dashboard",
+    "history": "History (soon)",
+    "admin": "Admin (soon)",
+    "backToDashboard": "Back to dashboard",
+    "footer": "demo"
+  },
+  "dashboard": {
+    "eyebrow": "Overview",
+    "title": "Hi ",
+    "subtitle": "Find your previous studies or start a new bank statement analysis.",
+    "statTotal": "Studies this month",
+    "statPending": "Awaiting decision",
+    "statValidated": "Validated",
+    "newStudy": "New study",
+    "tableClient": "Client",
+    "tableDate": "Date",
+    "tableOutput": "Requested output",
+    "tableStatus": "Status",
+    "status": { "validated": "Validated", "review": "Needs review", "pending": "Pending" }
+  },
+  "chooseOutput": {
+    "eyebrow": "Step 0",
+    "title": "What result do you want?",
+    "subtitle": "Choose what the analysis should produce from the statement ",
+    "selected": "Selected"
+  },
+  "hero": {
+    "eyebrow": "DEMO",
+    "title": "Transaction Enrichment",
+    "subtitle": "Upload a bank statement  and get an enriched table back.",
+    "dropzoneTitle": "Drop your statement here",
+    "dropzoneHintPrefix": "Drag and drop or",
+    "dropzoneHintLink": "choose a CSV file",
+    "uploadButton": "Upload statement (CSV)",
+    "uploadButtonLoading": "Analyzing…",
+    "securityNote": "Expected columns: date, label, amount, MCC code."
+  },
+  "stepper": {
+    "step1": "Enrichment",
+    "step2": "Categorization",
+    "step3": "Feature Engineering",
+    "step4": "Lifestyle Intelligence",
+    "step5": "Decision",
+    "next": "Next",
+    "back": "Back",
+    "finish": "Finish",
+    "categorizeButton": "Categorize",
+    "categorizing": "Categorizing…",
+    "placeholder": "Upcoming step ."
+  },
+  "categorizationPage": {
+    "needEnrichmentFirst": "Upload a statement first in the Enrichment step."
+  },
+  "results": {
+    "total": "Total",
+    "searchPlaceholder": "Search a label, merchant, category…"
+  },
+  "table": {
+    "headers": {
+      "date": "Date",
+      "libelle": "Raw label",
+      "montant": "Amount",
+      "merchant": "Merchant",
+      "category": "Category",
+      "lifestyleTag": "Spending type",
+      "channel": "Channel",
+      "type": "Type",
+      "recurring": "Recurring",
+      "incomeFlag": "Income",
+      "normalizedDescription": "Normalized description",
+      "confidence": "Confidence"
+    },
+    "recurringYes": "Yes",
+    "recurringNo": "No",
+    "emptyRow": "No transaction matches this filter."
+  },
+  "featureEngineering": {
+  "needCategorizationFirst": "Categorize the statement first in the previous step.",
+  "computeButton": "Compute indicators",
+  "computing": "Computing…",
+  "monthlyIncome": "Monthly income",
+  "savingsRate": "Savings rate",
+  "travelRatio": "Travel spend ratio",
+  "groceryRatio": "Grocery spend ratio",
+  "recurringCommitments": "Recurring commitments",
+  "atmRatio": "ATM withdrawal ratio"
+},
+  "error": {
+    "generic": "Couldn't process this file ."
+  }
+}
