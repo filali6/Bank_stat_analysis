@@ -90,3 +90,28 @@ class CategorizedTransactionsInput(BaseModel):
     re-running Enrichment+Categorization from scratch."""
 
     transactions: List[CategorizedTransaction]
+
+class LifestyleFeatures(BaseModel):
+    """The 6 outputs of the Lifestyle Intelligence step — a scorecard
+    and rule-based interpretation of the client's already-computed
+    financial indicators. No ML: explainability comes "by construction"
+    (each score is returned together with the reasons that produced
+    it), unlike Categorization where SHAP would explain a real trained
+    model after the fact.
+    """
+
+    lifestyle_segment: str
+    affluence_score: float
+    financial_discipline_score: float
+    travel_activity_index: str
+    family_responsibility_index: str
+    overall_lifestyle_index: float
+    reasons: List[str]
+
+
+class ClientFeaturesInput(BaseModel):
+    """Wraps the Feature Engineering result — used to chain Lifestyle
+    Intelligence onto the previous step, same pattern as
+    CategorizedTransactionsInput."""
+
+    features: ClientFeatures
