@@ -36,3 +36,12 @@ export interface ClientFeatures {
   recurring_commitments: number;
   atm_withdrawal_ratio: number;
 }
+export interface LifestyleFeatures {
+  lifestyle_segment: string;
+  affluence_score: number;
+  financial_discipline_score: number;
+  travel_activity_index: string;
+  family_responsibility_index: string;
+  overall_lifestyle_index: number;
+  reasons: string[];
+}

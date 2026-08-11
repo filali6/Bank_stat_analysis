@@ -3,7 +3,7 @@ import { Injectable, signal } from '@angular/core';
 import { EnrichmentApiService } from './enrichment-api.service';
 import { TranslationService } from './translation.service';
 import { CategorizationResponse, EnrichmentResponse } from '../models/enriched-transaction.model';
-import { ClientFeatures } from '../models/enriched-transaction.model';
+import { ClientFeatures,LifestyleFeatures } from '../models/enriched-transaction.model';
 
 export type OutputKey = 'credit' | 'risk' | 'kyc' | 'opportunities';
 
@@ -18,6 +18,8 @@ export class StudySessionService {
   readonly errorMessage = signal<string | null>(null);
   readonly clientFeatures = signal<ClientFeatures | null>(null);
   readonly isLoadingFeatures = signal(false);
+  readonly lifestyleFeatures = signal<LifestyleFeatures | null>(null);
+  readonly isLoadingLifestyle = signal(false);
 
   constructor(
     private readonly api: EnrichmentApiService,
@@ -34,6 +36,7 @@ export class StudySessionService {
     this.clientFeatures.set(null);
     this.isLoadingEnrichment.set(true);
     this.errorMessage.set(null);
+    this.lifestyleFeatures.set(null);
 
     this.api.enrich(file).subscribe({
       next: (response) => {
@@ -73,6 +76,7 @@ export class StudySessionService {
     this.categorizationResult.set(null);
     this.clientFeatures.set(null);
     this.errorMessage.set(null);
+    this.lifestyleFeatures.set(null);
   }
   computeFeatures(): void {
     const categorized = this.categorizationResult();
@@ -89,6 +93,24 @@ export class StudySessionService {
       error: (err) => {
         this.errorMessage.set(err?.error?.detail ?? this.translation.t('error.generic'));
         this.isLoadingFeatures.set(false);
+      },
+    });
+  }
+  computeLifestyle(): void {
+    const features = this.clientFeatures();
+    if (!features) return;
+
+    this.isLoadingLifestyle.set(true);
+    this.errorMessage.set(null);
+
+    this.api.computeLifestyle(features).subscribe({
+      next: (lifestyle) => {
+        this.lifestyleFeatures.set(lifestyle);
+        this.isLoadingLifestyle.set(false);
+      },
+      error: (err) => {
+        this.errorMessage.set(err?.error?.detail ?? this.translation.t('error.generic'));
+        this.isLoadingLifestyle.set(false);
       },
     });
   }

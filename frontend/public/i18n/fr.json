@@ -89,6 +89,18 @@
   "recurringCommitments": "Engagements récurrents",
   "atmRatio": "Ratio retrait DAB"
 },
+"lifestyleIntelligence": {
+  "needFeaturesFirst": "Calcule d'abord les indicateurs à l'étape précédente.",
+  "computeButton": "Calculer le profil",
+  "computing": "Calcul en cours…",
+  "segment": "Segment",
+  "affluenceScore": "Score d'aisance",
+  "disciplineScore": "Discipline financière",
+  "travelIndex": "Indice d'activité voyage",
+  "familyIndex": "Indice de responsabilité familiale",
+  "overallIndex": "Indice global",
+  "reasons": "Pourquoi ce résultat"
+},
   "error": {
     "generic": "Impossible de traiter ce fichier ."}
 }

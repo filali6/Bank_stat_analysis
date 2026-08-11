@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { environment } from '../../../environments/environment';
-import { CategorizationResponse, EnrichmentResponse,ClientFeatures, CategorizedTransaction } from '../models/enriched-transaction.model';
+import { CategorizationResponse, EnrichmentResponse,ClientFeatures, CategorizedTransaction,LifestyleFeatures } from '../models/enriched-transaction.model';
 
 @Injectable({ providedIn: 'root' })
 export class EnrichmentApiService {
@@ -26,5 +26,8 @@ export class EnrichmentApiService {
   }
   computeFeatures(transactions: CategorizedTransaction[]): Observable<ClientFeatures> {
     return this.http.post<ClientFeatures>(`${this.baseUrl}/feature-engineering/compute`, { transactions });
+  }
+  computeLifestyle(features: ClientFeatures): Observable<LifestyleFeatures> {
+    return this.http.post<LifestyleFeatures>(`${this.baseUrl}/lifestyle-intelligence/compute`, { features });
   }
 }

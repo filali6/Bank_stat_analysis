@@ -11,6 +11,9 @@ from app.repositories.business_lifestyle_repository import BusinessLifestyleRepo
 from app.repositories.category_model_repository import CategoryModelRepository
 from app.services.categorization_service import CategorizationService
 from app.services.feature_engineering_service import FeatureEngineeringService
+from app.services.lifestyle_intelligence_service import LifestyleIntelligenceService
+from app.repositories.scorecard_rules_repository import ScorecardRulesRepository
+
 
 """This is the ONE place in the codebase where concrete classes are
 wired together. Everywhere else, code depends on the Matcher interface
@@ -64,3 +67,11 @@ def get_categorization_service() -> CategorizationService:
 @lru_cache
 def get_feature_engineering_service() -> FeatureEngineeringService:
     return FeatureEngineeringService()
+
+@lru_cache
+def get_scorecard_rules_repository() -> ScorecardRulesRepository:
+    return ScorecardRulesRepository(settings.scorecard_rules_path)
+
+@lru_cache
+def get_lifestyle_intelligence_service() -> LifestyleIntelligenceService:
+    return LifestyleIntelligenceService(get_scorecard_rules_repository())

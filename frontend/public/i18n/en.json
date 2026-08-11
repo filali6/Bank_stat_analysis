@@ -89,6 +89,18 @@
   "recurringCommitments": "Recurring commitments",
   "atmRatio": "ATM withdrawal ratio"
 },
+"lifestyleIntelligence": {
+  "needFeaturesFirst": "Compute the indicators first in the previous step.",
+  "computeButton": "Compute profile",
+  "computing": "Computing…",
+  "segment": "Segment",
+  "affluenceScore": "Affluence score",
+  "disciplineScore": "Financial discipline",
+  "travelIndex": "Travel activity index",
+  "familyIndex": "Family responsibility index",
+  "overallIndex": "Overall index",
+  "reasons": "Why this result"
+},
   "error": {
     "generic": "Couldn't process this file ."
   }

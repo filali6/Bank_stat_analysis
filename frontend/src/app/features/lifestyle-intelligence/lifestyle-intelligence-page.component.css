@@ -1,0 +1,91 @@
+@import '../../shared/styles/step-actions.css';
+
+.results {
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 0 24px 24px;
+}
+
+.segment-banner {
+    background: #eef0fd;
+    border: 1px solid #c7cbf5;
+    border-radius: 12px;
+    padding: 18px 20px;
+    margin-bottom: 16px;
+}
+
+.segment-label {
+    font-size: 11.5px;
+    color: #4f46e5;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    margin: 0 0 4px;
+}
+
+.segment-value {
+    font-size: 20px;
+    font-weight: 700;
+    color: #111827;
+    margin: 0;
+}
+
+.metric-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.metric-card {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 18px;
+}
+
+.metric-card.highlight {
+    border-color: #4f46e5;
+    border-width: 2px;
+    background: #f8f8ff;
+}
+
+.metric-card .label {
+    font-size: 11.5px;
+    color: #9ca3af;
+    margin: 0 0 6px;
+}
+
+.metric-card .value {
+    font-size: 20px;
+    font-weight: 700;
+    color: #111827;
+    margin: 0;
+}
+
+.reasons-card {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 18px 20px;
+}
+
+.reasons-title {
+    font-size: 12.5px;
+    font-weight: 700;
+    color: #9ca3af;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    margin: 0 0 10px;
+}
+
+.reasons-card ul {
+    margin: 0;
+    padding-left: 18px;
+}
+
+.reasons-card li {
+    color: #374151;
+    font-size: 13.5px;
+    line-height: 1.8;
+}
