@@ -45,3 +45,53 @@ export interface LifestyleFeatures {
   overall_lifestyle_index: number;
   reasons: string[];
 }
+export interface CreditDecisionDetails {
+  credit_score: number;
+  recommendation: string;
+  repayment_capacity: number;
+}
+
+export interface RiskAlert {
+  severity: 'low' | 'medium' | 'high';
+  message: string;
+}
+
+export interface RiskDecisionDetails {
+  risk_level: string;
+  alerts: RiskAlert[];
+}
+
+export interface ConsistencyCheck {
+  label: string;
+  status: 'consistent' | 'needs_review';
+}
+
+export interface KycDecisionDetails {
+  consistency_checks: ConsistencyCheck[];
+  profile_summary: string;
+}
+
+export interface SuggestedProduct {
+  name: string;
+  reason: string;
+}
+
+export interface OpportunitiesDecisionDetails {
+  suggested_products: SuggestedProduct[];
+}
+
+export interface DecisionResult {
+  output_type: string;
+  headline: string;
+  credit?: CreditDecisionDetails;
+  risk?: RiskDecisionDetails;
+  kyc?: KycDecisionDetails;
+  opportunities?: OpportunitiesDecisionDetails;
+}
+
+export interface AffordabilityResult {
+  monthly_payment: number;
+  disposable_income: number;
+  max_affordable_payment: number;
+  affordable: boolean;
+}

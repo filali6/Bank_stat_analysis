@@ -4,6 +4,7 @@ from app.api.feature_engineering_routes import router as feature_engineering_rou
 from app.api.categorization_routes import router as categorization_router
 from app.api.enrichment_routes import router as enrichment_router
 from app.api.lifestyle_intelligence_routes import router as lifestyle_intelligence_router
+from app.api.decision_routes import router as decision_router
 from app.core.config import settings
 
 app = FastAPI(title="Transaction Enrichment API", version="0.1.0")
@@ -20,6 +21,7 @@ app.include_router(enrichment_router)
 app.include_router(categorization_router)
 app.include_router(feature_engineering_router)
 app.include_router(lifestyle_intelligence_router)
+app.include_router(decision_router)
 
 
 @app.get("/health", tags=["health"])

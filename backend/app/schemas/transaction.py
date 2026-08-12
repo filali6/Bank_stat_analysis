@@ -115,3 +115,87 @@ class ClientFeaturesInput(BaseModel):
     CategorizedTransactionsInput."""
 
     features: ClientFeatures
+
+# --- Decision (output-specific views over the already-computed result) -----
+
+class CreditDecisionDetails(BaseModel):
+    """Credit underwriting view (FR-A5, FR-A6)."""
+
+    credit_score: int
+    recommendation: str
+    repayment_capacity: float
+
+
+class RiskAlert(BaseModel):
+    severity: str  # "low" | "medium" | "high"
+    message: str
+
+
+class RiskDecisionDetails(BaseModel):
+    """Risk management view (FR-A8, FR-A9)."""
+
+    risk_level: str  # "Low" | "Medium" | "High"
+    alerts: List[RiskAlert]
+
+
+class ConsistencyCheck(BaseModel):
+    label: str
+    status: str  # "consistent" | "needs_review"
+
+
+class KycDecisionDetails(BaseModel):
+    """Customer insight / KYC view (FR-A12)."""
+
+    consistency_checks: List[ConsistencyCheck]
+    profile_summary: str
+
+
+class SuggestedProduct(BaseModel):
+    name: str
+    reason: str
+
+
+class OpportunitiesDecisionDetails(BaseModel):
+    """Commercial opportunities view (FR-A13, FR-A14)."""
+
+    suggested_products: List[SuggestedProduct]
+
+
+class DecisionRequest(BaseModel):
+    """Chains Decision onto the already-computed Feature Engineering +
+    Lifestyle Intelligence results, plus the output type chosen at the
+    start of the study (FR-A3)."""
+
+    output_type: str  # "credit" | "risk" | "kyc" | "opportunities"
+    features: ClientFeatures
+    lifestyle: LifestyleFeatures
+
+
+class DecisionResult(BaseModel):
+    """Only the block matching `output_type` is populated — the other
+    three stay null. The frontend renders whichever one is present."""
+
+    output_type: str
+    headline: str
+    credit: Optional[CreditDecisionDetails] = None
+    risk: Optional[RiskDecisionDetails] = None
+    kyc: Optional[KycDecisionDetails] = None
+    opportunities: Optional[OpportunitiesDecisionDetails] = None
+
+
+class AffordabilityRequest(BaseModel):
+    """FR-A7: enter a loan amount and duration to check if it's
+    affordable — a separate, interactive endpoint since the analyst can
+    try several amounts on the same client without recomputing anything
+    else."""
+
+    features: ClientFeatures
+    loan_amount: float
+    duration_months: int
+
+
+class AffordabilityResult(BaseModel):
+    monthly_payment: float
+    disposable_income: float
+    max_affordable_payment: float
+    affordable: bool

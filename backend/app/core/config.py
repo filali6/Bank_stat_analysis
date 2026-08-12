@@ -21,6 +21,7 @@ class Settings(BaseSettings):
     business_lifestyle_mapping_path: Path = APP_DIR / "data" / "business_lifestyle_mapping.json"
     category_model_bundle_path: Path = APP_DIR / "data" / "models" / "category_model_bundle.pkl"
     scorecard_rules_path: Path = APP_DIR / "data" / "scorecard_rules.json"
+    decision_rules_path: Path = APP_DIR / "data" / "decision_rules.json"
 
 
 settings = Settings()

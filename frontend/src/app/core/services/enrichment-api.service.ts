@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { environment } from '../../../environments/environment';
-import { CategorizationResponse, EnrichmentResponse,ClientFeatures, CategorizedTransaction,LifestyleFeatures } from '../models/enriched-transaction.model';
+import { CategorizationResponse, EnrichmentResponse, ClientFeatures, CategorizedTransaction, LifestyleFeatures, DecisionResult, AffordabilityResult } from '../models/enriched-transaction.model';
 
 @Injectable({ providedIn: 'root' })
 export class EnrichmentApiService {
@@ -29,5 +29,20 @@ export class EnrichmentApiService {
   }
   computeLifestyle(features: ClientFeatures): Observable<LifestyleFeatures> {
     return this.http.post<LifestyleFeatures>(`${this.baseUrl}/lifestyle-intelligence/compute`, { features });
+  }
+  computeDecision(outputType: string, features: ClientFeatures, lifestyle: LifestyleFeatures): Observable<DecisionResult> {
+    return this.http.post<DecisionResult>(`${this.baseUrl}/decision/compute`, {
+      output_type: outputType,
+      features,
+      lifestyle,
+    });
+  }
+
+  checkAffordability(features: ClientFeatures, loanAmount: number, durationMonths: number): Observable<AffordabilityResult> {
+    return this.http.post<AffordabilityResult>(`${this.baseUrl}/decision/check-affordability`, {
+      features,
+      loan_amount: loanAmount,
+      duration_months: durationMonths,
+    });
   }
 }

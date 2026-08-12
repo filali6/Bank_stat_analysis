@@ -3,9 +3,16 @@ import { Injectable, signal } from '@angular/core';
 import { EnrichmentApiService } from './enrichment-api.service';
 import { TranslationService } from './translation.service';
 import { CategorizationResponse, EnrichmentResponse } from '../models/enriched-transaction.model';
-import { ClientFeatures,LifestyleFeatures } from '../models/enriched-transaction.model';
+import { ClientFeatures,LifestyleFeatures,DecisionResult, AffordabilityResult } from '../models/enriched-transaction.model';
 
 export type OutputKey = 'credit' | 'risk' | 'kyc' | 'opportunities';
+ 
+export type DecisionChoice = 'accept' | 'reject' | 'request_info';
+
+export interface RecordedDecision {
+  choice: DecisionChoice;
+  comment: string;
+}
 
 @Injectable({ providedIn: 'root' })
 export class StudySessionService {
@@ -20,6 +27,14 @@ export class StudySessionService {
   readonly isLoadingFeatures = signal(false);
   readonly lifestyleFeatures = signal<LifestyleFeatures | null>(null);
   readonly isLoadingLifestyle = signal(false);
+  readonly decisionResult = signal<DecisionResult | null>(null);
+  readonly isLoadingDecision = signal(false);
+  readonly affordabilityResult = signal<AffordabilityResult | null>(null);
+  readonly isCheckingAffordability = signal(false);
+  /** No persistence layer exists yet (see Dashboard's own mock data) —
+   * this stays in-memory for the current session only. Recording a
+   * real decision to a database is a follow-up, not faked here. */
+  readonly recordedDecision = signal<RecordedDecision | null>(null);
 
   constructor(
     private readonly api: EnrichmentApiService,
@@ -37,6 +52,9 @@ export class StudySessionService {
     this.isLoadingEnrichment.set(true);
     this.errorMessage.set(null);
     this.lifestyleFeatures.set(null);
+    this.decisionResult.set(null);
+    this.affordabilityResult.set(null);
+    this.recordedDecision.set(null);
 
     this.api.enrich(file).subscribe({
       next: (response) => {
@@ -77,6 +95,9 @@ export class StudySessionService {
     this.clientFeatures.set(null);
     this.errorMessage.set(null);
     this.lifestyleFeatures.set(null);
+    this.decisionResult.set(null);
+    this.affordabilityResult.set(null);
+    this.recordedDecision.set(null);
   }
   computeFeatures(): void {
     const categorized = this.categorizationResult();
@@ -113,5 +134,47 @@ export class StudySessionService {
         this.isLoadingLifestyle.set(false);
       },
     });
+  }
+  computeDecision(): void {
+    const outputType = this.selectedOutput();
+    const features = this.clientFeatures();
+    const lifestyle = this.lifestyleFeatures();
+    if (!outputType || !features || !lifestyle) return;
+
+    this.isLoadingDecision.set(true);
+    this.errorMessage.set(null);
+
+    this.api.computeDecision(outputType, features, lifestyle).subscribe({
+      next: (decision) => {
+        this.decisionResult.set(decision);
+        this.isLoadingDecision.set(false);
+      },
+      error: (err) => {
+        this.errorMessage.set(err?.error?.detail ?? this.translation.t('error.generic'));
+        this.isLoadingDecision.set(false);
+      },
+    });
+  }
+
+  checkAffordability(loanAmount: number, durationMonths: number): void {
+    const features = this.clientFeatures();
+    if (!features) return;
+
+    this.isCheckingAffordability.set(true);
+
+    this.api.checkAffordability(features, loanAmount, durationMonths).subscribe({
+      next: (result) => {
+        this.affordabilityResult.set(result);
+        this.isCheckingAffordability.set(false);
+      },
+      error: (err) => {
+        this.errorMessage.set(err?.error?.detail ?? this.translation.t('error.generic'));
+        this.isCheckingAffordability.set(false);
+      },
+    });
+  }
+
+  recordDecision(choice: DecisionChoice, comment: string): void {
+    this.recordedDecision.set({ choice, comment });
   }
 }

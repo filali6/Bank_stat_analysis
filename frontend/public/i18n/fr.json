@@ -101,6 +101,35 @@
   "overallIndex": "Indice global",
   "reasons": "Pourquoi ce résultat"
 },
+"decision": {
+  "needLifestyleFirst": "Calcule d'abord le profil à l'étape précédente.",
+  "computeButton": "Calculer la décision",
+  "computing": "Calcul en cours…",
+  "result": "Résultat",
+  "creditScore": "Score de crédit",
+  "recommendation": "Recommandation",
+  "repaymentCapacity": "Capacité de remboursement",
+  "affordabilityTitle": "Vérifier l'abordabilité d'un prêt",
+  "loanAmount": "Montant du prêt",
+  "durationMonths": "Durée (mois)",
+  "checkAffordability": "Vérifier",
+  "monthlyPayment": "Mensualité",
+  "maxAffordable": "Mensualité maximale abordable",
+  "affordable": "Abordable",
+  "notAffordable": "Non abordable",
+  "riskLevel": "Niveau de risque",
+  "noAlerts": "Aucune alerte détectée.",
+  "recordTitle": "Enregistrer une décision",
+  "accept": "Accepter",
+  "reject": "Rejeter",
+  "requestInfo": "Demander plus d'infos",
+  "commentPlaceholder": "Ajoute un commentaire (optionnel)…",
+  "confirm": "Confirmer la décision",
+  "recorded": "Décision enregistrée",
+  "backToDashboard": "Retour au dashboard",
+  "status": { "consistent": "Cohérent", "needs_review": "À vérifier" },
+  "choice": { "accept": "Acceptée", "reject": "Rejetée", "request_info": "Infos demandées" }
+},
   "error": {
     "generic": "Impossible de traiter ce fichier ."}
 }

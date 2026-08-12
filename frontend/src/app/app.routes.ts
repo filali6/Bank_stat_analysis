@@ -8,7 +8,7 @@ import { CategorizationPageComponent } from './features/categorization/categoriz
 import { PlaceholderComponent } from './features/placeholder/placeholder.component';
 import { FeatureEngineeringPageComponent } from './features/feature-engineering/feature-engineering-page.component';
 import { LifestyleIntelligencePageComponent } from './features/lifestyle-intelligence/lifestyle-intelligence-page.component';
-
+import { DecisionPageComponent } from './features/decision/decision-page.component';
 export const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   { path: 'dashboard', component: DashboardComponent },
@@ -21,7 +21,7 @@ export const routes: Routes = [
       { path: 'categorization', component: CategorizationPageComponent },
       { path: 'feature-engineering', component: FeatureEngineeringPageComponent },
       { path: 'lifestyle-intelligence', component: LifestyleIntelligencePageComponent },
-      { path: 'decision', component: PlaceholderComponent, data: { titleKey: 'stepper.step5', backRoute: '/studies/new/lifestyle-intelligence', nextRoute: null } },
+      { path: 'decision', component: DecisionPageComponent },
       
     ],
   },

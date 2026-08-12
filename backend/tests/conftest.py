@@ -10,6 +10,17 @@ from app.repositories.scorecard_rules_repository import (
     Tier,
     TravelIndexRules,
 )
+from app.repositories.decision_rules_repository import (
+    AffordabilityRules,
+    AlertTier,
+    CreditRules,
+    DecisionRules,
+    KycRules,
+    OpportunitiesRules,
+    OpportunityRule,
+    RiskRules,
+    SimpleAlert,
+)
 
 
 
@@ -130,6 +141,78 @@ def scorecard_rules_repository() -> FakeScorecardRulesRepository:
                 frugal_saver="Frugal Saver",
                 financially_vulnerable="Financially Vulnerable",
                 balanced_middle_income="Balanced Middle-Income",
+            ),
+        )
+    )
+
+class FakeDecisionRulesRepository:
+    """An in-memory stand-in for DecisionRulesRepository. Decision
+    tests use a fixed, known ruleset instead of the real
+    decision_rules.json — so they only fail when DecisionService's
+    logic itself is broken, never because a bank retuned a threshold
+    or renamed a product.
+    """
+
+    def __init__(self, rules: DecisionRules):
+        self._rules = rules
+
+    def get_rules(self) -> DecisionRules:
+        return self._rules
+
+
+@pytest.fixture
+def decision_rules_repository() -> FakeDecisionRulesRepository:
+    return FakeDecisionRulesRepository(
+        DecisionRules(
+            credit=CreditRules(
+                score_scale=8.5,
+                approved_min=700,
+                review_min=550,
+                approved_label="Approved",
+                review_label="Review recommended",
+                declined_label="Not recommended",
+            ),
+            affordability=AffordabilityRules(ratio=0.4),
+            risk=RiskRules(
+                no_income_alert=SimpleAlert(severity="high", message="No income detected on this statement"),
+                commitments_tiers=[
+                    AlertTier(threshold=0.6, severity="high", message="Recurring commitments exceed 60% of income"),
+                    AlertTier(threshold=0.4, severity="medium", message="Recurring commitments exceed 40% of income"),
+                ],
+                atm_ratio_tier=AlertTier(threshold=20, severity="medium", message="High cash withdrawal activity"),
+                low_savings_tier=AlertTier(threshold=2, severity="medium", message="Very low or negative savings rate"),
+                high_risk_level="High",
+                medium_risk_level="Medium",
+                low_risk_level="Low",
+            ),
+            kyc=KycRules(
+                income_check_label="Income detected on statement",
+                spending_check_label="Spending stays within income",
+                segment_check_label="Lifestyle segment assigned",
+                consistent_status="consistent",
+                needs_review_status="needs_review",
+            ),
+            opportunities=OpportunitiesRules(
+                rules=[
+                    OpportunityRule(
+                        field="travel_activity_index", operator="equals", value="High",
+                        product_name="Premium Travel Card", reason="High travel spending detected",
+                    ),
+                    OpportunityRule(
+                        field="savings_rate", operator="greater_than", value=15,
+                        product_name="Investment Account", reason="Strong savings behavior",
+                    ),
+                    OpportunityRule(
+                        field="atm_withdrawal_ratio", operator="greater_than", value=15,
+                        product_name="Overdraft Protection", reason="Frequent cash withdrawals",
+                    ),
+                    OpportunityRule(
+                        field="lifestyle_segment", operator="equals", value="Affluent Professional",
+                        product_name="Premium Banking Package", reason="Affluent client profile",
+                    ),
+                ],
+                default_product_name="Standard Savings Account",
+                default_product_reason="Default suggestion — no strong signal detected",
             ),
         )
     )

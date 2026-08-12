@@ -1,0 +1,42 @@
+{
+  "credit": {
+    "score_scale": 8.5,
+    "approved_min": 700,
+    "review_min": 550,
+    "approved_label": "Approved",
+    "review_label": "Review recommended",
+    "declined_label": "Not recommended"
+  },
+  "affordability": {
+    "ratio": 0.4
+  },
+  "risk": {
+    "no_income_alert": { "severity": "high", "message": "No income detected on this statement" },
+    "commitments_tiers": [
+      { "threshold": 0.6, "severity": "high", "message": "Recurring commitments exceed 60% of income" },
+      { "threshold": 0.4, "severity": "medium", "message": "Recurring commitments exceed 40% of income" }
+    ],
+    "atm_ratio_tier": { "threshold": 20, "severity": "medium", "message": "High cash withdrawal activity (> 20% of spending)" },
+    "low_savings_tier": { "threshold": 2, "severity": "medium", "message": "Very low or negative savings rate" },
+    "high_risk_level": "High",
+    "medium_risk_level": "Medium",
+    "low_risk_level": "Low"
+  },
+  "kyc": {
+    "income_check_label": "Income detected on statement",
+    "spending_check_label": "Spending stays within income",
+    "segment_check_label": "Lifestyle segment assigned",
+    "consistent_status": "consistent",
+    "needs_review_status": "needs_review"
+  },
+  "opportunities": {
+    "rules": [
+      { "field": "travel_activity_index", "operator": "equals", "value": "High", "product_name": "Premium Travel Card", "reason": "High travel spending detected" },
+      { "field": "savings_rate", "operator": "greater_than", "value": 15, "product_name": "Investment Account", "reason": "Strong savings behavior" },
+      { "field": "atm_withdrawal_ratio", "operator": "greater_than", "value": 15, "product_name": "Overdraft Protection", "reason": "Frequent cash withdrawals" },
+      { "field": "lifestyle_segment", "operator": "equals", "value": "Affluent Professional", "product_name": "Premium Banking Package", "reason": "Affluent client profile" }
+    ],
+    "default_product_name": "Standard Savings Account",
+    "default_product_reason": "Default suggestion — no strong signal detected"
+  }
+}

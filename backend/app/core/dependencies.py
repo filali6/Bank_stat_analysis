@@ -13,6 +13,9 @@ from app.services.categorization_service import CategorizationService
 from app.services.feature_engineering_service import FeatureEngineeringService
 from app.services.lifestyle_intelligence_service import LifestyleIntelligenceService
 from app.repositories.scorecard_rules_repository import ScorecardRulesRepository
+from app.repositories.decision_rules_repository import DecisionRulesRepository
+from app.services.decision_service import DecisionService
+
 
 
 """This is the ONE place in the codebase where concrete classes are
@@ -75,3 +78,10 @@ def get_scorecard_rules_repository() -> ScorecardRulesRepository:
 @lru_cache
 def get_lifestyle_intelligence_service() -> LifestyleIntelligenceService:
     return LifestyleIntelligenceService(get_scorecard_rules_repository())
+@lru_cache
+def get_decision_rules_repository() -> DecisionRulesRepository:
+    return DecisionRulesRepository(settings.decision_rules_path)
+
+@lru_cache
+def get_decision_service() -> DecisionService:
+    return DecisionService(get_decision_rules_repository())
