@@ -69,6 +69,7 @@
     border-radius: 12px;
     padding: 18px 20px;
     margin-bottom: 16px;
+    gap: 8px;
 }
 
 .card-title {
@@ -327,4 +328,9 @@
 
 .confirmation-card .next-button {
     margin-top: 12px;
+}
+.error-message.no-padding {
+    margin-top: 12px;
+    padding: 0;
+    max-width: none;
 }

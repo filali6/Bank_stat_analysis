@@ -2,17 +2,20 @@ import { Injectable, signal } from '@angular/core';
 
 import { EnrichmentApiService } from './enrichment-api.service';
 import { TranslationService } from './translation.service';
-import { CategorizationResponse, EnrichmentResponse } from '../models/enriched-transaction.model';
-import { ClientFeatures,LifestyleFeatures,DecisionResult, AffordabilityResult } from '../models/enriched-transaction.model';
+import {
+  CategorizationResponse,
+  EnrichmentResponse,
+  ClientFeatures,
+  LifestyleFeatures,
+  DecisionResult,
+  AffordabilityResult,
+  Client,
+  SaveStudyRequest,
+  StudyOut,
+} from '../models/enriched-transaction.model';
 
 export type OutputKey = 'credit' | 'risk' | 'kyc' | 'opportunities';
- 
 export type DecisionChoice = 'accept' | 'reject' | 'request_info';
-
-export interface RecordedDecision {
-  choice: DecisionChoice;
-  comment: string;
-}
 
 @Injectable({ providedIn: 'root' })
 export class StudySessionService {
@@ -31,10 +34,16 @@ export class StudySessionService {
   readonly isLoadingDecision = signal(false);
   readonly affordabilityResult = signal<AffordabilityResult | null>(null);
   readonly isCheckingAffordability = signal(false);
-  /** No persistence layer exists yet (see Dashboard's own mock data) —
-   * this stays in-memory for the current session only. Recording a
-   * real decision to a database is a follow-up, not faked here. */
-  readonly recordedDecision = signal<RecordedDecision | null>(null);
+
+  // --- Client picker (FR-A2) ------------------------------------------------
+  readonly clients = signal<Client[]>([]);
+  readonly isLoadingClients = signal(false);
+  readonly selectedClientId = signal<number | null>(null);
+  readonly newClientLabel = signal('');
+
+  // --- Persisted study (FR-A16, FR-A17) --------------------------------------
+  readonly savedStudy = signal<StudyOut | null>(null);
+  readonly isSavingStudy = signal(false);
 
   constructor(
     private readonly api: EnrichmentApiService,
@@ -45,16 +54,45 @@ export class StudySessionService {
     this.selectedOutput.set(key);
   }
 
+  loadClients(): void {
+    this.isLoadingClients.set(true);
+    this.api.getClients().subscribe({
+      next: (clients) => {
+        this.clients.set(clients);
+        this.isLoadingClients.set(false);
+      },
+      error: () => this.isLoadingClients.set(false),
+    });
+  }
+
+  selectExistingClient(id: number | null): void {
+    this.selectedClientId.set(id);
+    if (id !== null) {
+      this.newClientLabel.set('');
+    }
+  }
+
+  setNewClientLabel(label: string): void {
+    this.newClientLabel.set(label);
+    if (label.trim().length > 0) {
+      this.selectedClientId.set(null);
+    }
+  }
+
+  hasClientChosen(): boolean {
+    return this.selectedClientId() !== null || this.newClientLabel().trim().length > 0;
+  }
+
   uploadFile(file: File): void {
     this.selectedFile.set(file);
     this.categorizationResult.set(null);
     this.clientFeatures.set(null);
-    this.isLoadingEnrichment.set(true);
-    this.errorMessage.set(null);
     this.lifestyleFeatures.set(null);
     this.decisionResult.set(null);
     this.affordabilityResult.set(null);
-    this.recordedDecision.set(null);
+    this.savedStudy.set(null);
+    this.isLoadingEnrichment.set(true);
+    this.errorMessage.set(null);
 
     this.api.enrich(file).subscribe({
       next: (response) => {
@@ -93,12 +131,15 @@ export class StudySessionService {
     this.enrichmentResult.set(null);
     this.categorizationResult.set(null);
     this.clientFeatures.set(null);
-    this.errorMessage.set(null);
     this.lifestyleFeatures.set(null);
     this.decisionResult.set(null);
     this.affordabilityResult.set(null);
-    this.recordedDecision.set(null);
+    this.savedStudy.set(null);
+    this.selectedClientId.set(null);
+    this.newClientLabel.set('');
+    this.errorMessage.set(null);
   }
+
   computeFeatures(): void {
     const categorized = this.categorizationResult();
     if (!categorized) return;
@@ -117,6 +158,7 @@ export class StudySessionService {
       },
     });
   }
+
   computeLifestyle(): void {
     const features = this.clientFeatures();
     if (!features) return;
@@ -135,6 +177,7 @@ export class StudySessionService {
       },
     });
   }
+
   computeDecision(): void {
     const outputType = this.selectedOutput();
     const features = this.clientFeatures();
@@ -174,7 +217,50 @@ export class StudySessionService {
     });
   }
 
-  recordDecision(choice: DecisionChoice, comment: string): void {
-    this.recordedDecision.set({ choice, comment });
+  /** Persists the completed study, at the moment the analyst confirms
+   * a decision (FR-A16, FR-A17). Real backend save now — no longer
+   * just kept in memory. */
+  saveDecision(choice: DecisionChoice, comment: string): void {
+    const outputType = this.selectedOutput();
+    const enrichment = this.enrichmentResult();
+    const categorization = this.categorizationResult();
+    const features = this.clientFeatures();
+    const lifestyle = this.lifestyleFeatures();
+    const decision = this.decisionResult();
+
+    if (!outputType || !enrichment || !categorization || !features || !lifestyle || !decision) {
+      return;
+    }
+    if (!this.hasClientChosen()) {
+      this.errorMessage.set(this.translation.t('decision.needClient'));
+      return;
+    }
+
+    this.isSavingStudy.set(true);
+    this.errorMessage.set(null);
+
+    const payload: SaveStudyRequest = {
+      client_id: this.selectedClientId(),
+      new_client_label: this.selectedClientId() === null ? this.newClientLabel().trim() || null : null,
+      output_type: outputType,
+      enrichment_result: enrichment,
+      categorization_result: categorization,
+      client_features: features,
+      lifestyle_features: lifestyle,
+      decision_result: decision,
+      decision_choice: choice,
+      decision_comment: comment || null,
+    };
+
+    this.api.saveStudy(payload).subscribe({
+      next: (saved) => {
+        this.savedStudy.set(saved);
+        this.isSavingStudy.set(false);
+      },
+      error: (err) => {
+        this.errorMessage.set(err?.error?.detail ?? this.translation.t('error.generic'));
+        this.isSavingStudy.set(false);
+      },
+    });
   }
 }

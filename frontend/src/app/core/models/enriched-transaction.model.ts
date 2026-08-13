@@ -95,3 +95,47 @@ export interface AffordabilityResult {
   max_affordable_payment: number;
   affordable: boolean;
 }
+export interface Client {
+  id: number;
+  label: string;
+  created_at: string;
+  monitoring_enabled: boolean;
+}
+
+export interface SaveStudyRequest {
+  client_id?: number | null;
+  new_client_label?: string | null;
+  output_type: string;
+  enrichment_result: unknown;
+  categorization_result: unknown;
+  client_features: ClientFeatures;
+  lifestyle_features: LifestyleFeatures;
+  decision_result: DecisionResult;
+  decision_choice: string;
+  decision_comment?: string | null;
+}
+
+export interface StudyOut {
+  id: number;
+  client_id: number;
+  client_label: string;
+  created_at: string;
+  output_type: string;
+  source: string;
+  enrichment_result: unknown;
+  categorization_result: unknown;
+  client_features: ClientFeatures;
+  lifestyle_features: LifestyleFeatures;
+  decision_result: DecisionResult;
+  decision_choice: string;
+  decision_comment?: string | null;
+}
+
+export interface StudySummary {
+  id: number;
+  client_label: string;
+  created_at: string;
+  output_type: string;
+  headline: string;
+  decision_choice: string;
+}

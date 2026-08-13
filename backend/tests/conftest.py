@@ -21,7 +21,10 @@ from app.repositories.decision_rules_repository import (
     RiskRules,
     SimpleAlert,
 )
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
 
+from app.db.database import Base
 
 
 class FakeMerchantRepository:
@@ -216,3 +219,20 @@ def decision_rules_repository() -> FakeDecisionRulesRepository:
             ),
         )
     )
+
+@pytest.fixture
+def db_session():
+    """A fresh, isolated in-memory SQLite database per test — never
+    touches the real app.db file, and every test starts with empty
+    tables (no leftover data from a previous test or a real run).
+    """
+    engine = create_engine("sqlite:///:memory:", connect_args={"check_same_thread": False})
+    Base.metadata.create_all(bind=engine)
+    TestingSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+
+    session = TestingSessionLocal()
+    try:
+        yield session
+    finally:
+        session.close()
+        engine.dispose()

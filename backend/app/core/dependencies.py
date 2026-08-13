@@ -15,6 +15,13 @@ from app.services.lifestyle_intelligence_service import LifestyleIntelligenceSer
 from app.repositories.scorecard_rules_repository import ScorecardRulesRepository
 from app.repositories.decision_rules_repository import DecisionRulesRepository
 from app.services.decision_service import DecisionService
+from fastapi import Depends
+from sqlalchemy.orm import Session
+
+from app.db.database import SessionLocal
+from app.repositories.client_repository import ClientRepository
+from app.repositories.study_repository import StudyRepository
+from app.services.study_service import StudyService
 
 
 
@@ -85,3 +92,28 @@ def get_decision_rules_repository() -> DecisionRulesRepository:
 @lru_cache
 def get_decision_service() -> DecisionService:
     return DecisionService(get_decision_rules_repository())
+
+def get_db():
+    """One SQLAlchemy Session per request — not a singleton, unlike
+    the file-backed repositories above. FastAPI closes it automatically
+    once the request finishes, even if an error was raised."""
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
+
+
+def get_client_repository(db: Session = Depends(get_db)) -> ClientRepository:
+    return ClientRepository(db)
+
+
+def get_study_repository(db: Session = Depends(get_db)) -> StudyRepository:
+    return StudyRepository(db)
+
+
+def get_study_service(
+    client_repository: ClientRepository = Depends(get_client_repository),
+    study_repository: StudyRepository = Depends(get_study_repository),
+) -> StudyService:
+    return StudyService(client_repository, study_repository)

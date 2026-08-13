@@ -20,13 +20,21 @@
     "tableDate": "Date",
     "tableOutput": "Requested output",
     "tableStatus": "Status",
-    "status": { "validated": "Validated", "review": "Needs review", "pending": "Pending" }
+    "status": { "validated": "Validated", "review": "Needs review", "pending": "Pending" ,"rejected": "Rejected"},
+    "loading": "Loading…",
+"noStudies": "No studies recorded yet."
   },
   "chooseOutput": {
     "eyebrow": "Step 0",
     "title": "What result do you want?",
     "subtitle": "Choose what the analysis should produce from the statement ",
-    "selected": "Selected"
+    "selected": "Selected",
+    "clientTitle": "Client",
+"existingClient": "Existing client",
+"or": "or",
+"newClient": "New client",
+"newClientPlaceholder": "Client name…",
+"noneSelected": "None"
   },
   "hero": {
     "eyebrow": "DEMO",
@@ -128,7 +136,9 @@
   "recorded": "Decision recorded",
   "backToDashboard": "Back to dashboard",
   "status": { "consistent": "Consistent", "needs_review": "Needs review" },
-  "choice": { "accept": "Accepted", "reject": "Rejected", "request_info": "Info requested" }
+  "choice": { "accept": "Accepted", "reject": "Rejected", "request_info": "Info requested" },
+  "needClient": "Choose or create a client in step 0 before recording a decision.",
+"saving": "Saving…"
 },
   "error": {
     "generic": "Couldn't process this file ."

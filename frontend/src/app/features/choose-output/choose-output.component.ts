@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { OutputKey, StudySessionService } from '../../core/services/study-session.service';
@@ -13,11 +15,11 @@ interface OutputOption {
 @Component({
   selector: 'app-choose-output',
   standalone: true,
-  imports: [TranslatePipe],
+  imports: [CommonModule, FormsModule, TranslatePipe],
   templateUrl: './choose-output.component.html',
   styleUrl: './choose-output.component.css',
 })
-export class ChooseOutputComponent {
+export class ChooseOutputComponent implements OnInit {
   readonly outputs: OutputOption[] = [
     { key: 'credit', title: 'Credit underwriting', desc: '' },
     { key: 'risk', title: 'Risk management', desc: ' ' },
@@ -27,8 +29,20 @@ export class ChooseOutputComponent {
 
   constructor(readonly session: StudySessionService, private readonly router: Router) {}
 
+  ngOnInit(): void {
+    this.session.loadClients();
+  }
+
   select(key: OutputKey): void {
     this.session.selectOutput(key);
+  }
+
+  onExistingClientChange(value: string): void {
+    this.session.selectExistingClient(value ? Number(value) : null);
+  }
+
+  onNewClientLabelChange(value: string): void {
+    this.session.setNewClientLabel(value);
   }
 
   continueToStudy(): void {

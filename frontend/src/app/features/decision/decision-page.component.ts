@@ -35,7 +35,7 @@ export class DecisionPageComponent {
 
   confirmDecision(): void {
     if (!this.selectedChoice) return;
-    this.session.recordDecision(this.selectedChoice, this.comment);
+    this.session.saveDecision(this.selectedChoice, this.comment);
   }
 
   goBack(): void {

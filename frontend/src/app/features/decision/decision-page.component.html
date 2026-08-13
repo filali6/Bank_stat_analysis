@@ -118,7 +118,7 @@
     }
 
     <!-- Decision actions (FR-A16, FR-A17) -->
-    @if (!session.recordedDecision()) {
+    @if (!session.savedStudy()) {
     <div class="detail-card">
         <p class="card-title">{{ 'decision.recordTitle' | translate }}</p>
         <div class="choice-buttons">
@@ -139,15 +139,23 @@
         @if (selectedChoice) {
         <textarea class="comment-input" [(ngModel)]="comment"
             [placeholder]="'decision.commentPlaceholder' | translate"></textarea>
-        <button class="next-button" (click)="confirmDecision()">{{ 'decision.confirm' | translate }}</button>
+
+        @if (session.errorMessage()) {
+        <p class="error-message no-padding">{{ session.errorMessage() }}</p>
+        }
+
+        <button class="next-button" (click)="confirmDecision()" [disabled]="session.isSavingStudy()">
+            {{ session.isSavingStudy() ? ('decision.saving' | translate) : ('decision.confirm' | translate) }}
+        </button>
         }
     </div>
     } @else {
     <div class="confirmation-card">
-        <p>{{ 'decision.recorded' | translate }}: {{ ('decision.choice.' + session.recordedDecision()!.choice) |
-            translate }}</p>
-        @if (session.recordedDecision()!.comment) {
-        <p class="comment-echo">"{{ session.recordedDecision()!.comment }}"</p>
+        <p>{{ 'decision.recorded' | translate }}: {{ ('decision.choice.' + session.savedStudy()!.decision_choice) |
+            translate }} — {{ session.savedStudy()!.client_number }} · {{ session.savedStudy()!.client_label }} (Étude #{{
+            session.savedStudy()!.id }})</p>
+        @if (session.savedStudy()!.decision_comment) {
+        <p class="comment-echo">"{{ session.savedStudy()!.decision_comment }}"</p>
         }
         <button class="next-button" (click)="backToDashboard()">{{ 'decision.backToDashboard' | translate
             }}</button>

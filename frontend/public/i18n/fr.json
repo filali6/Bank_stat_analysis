@@ -20,13 +20,21 @@
     "tableDate": "Date",
     "tableOutput": "Résultat demandé",
     "tableStatus": "Statut",
-    "status": { "validated": "Validé", "review": "À revoir", "pending": "En attente" }
+    "status": { "validated": "Validé", "review": "À revoir", "pending": "En attente" ,"rejected": "Rejetée"},
+    "loading": "Chargement…",
+"noStudies": "Aucune étude enregistrée pour le moment."
   },
   "chooseOutput": {
     "eyebrow": "Étape 0",
     "title": "Quel résultat veux-tu obtenir ?",
     "subtitle": "Choisis ce que l'analyse doit produire à partir du relevé .",
-    "selected": "Sélectionné"
+    "selected": "Sélectionné",
+    "clientTitle": "Client",
+    "existingClient": "Client existant",
+    "or": "ou",
+    "newClient": "Nouveau client",
+    "newClientPlaceholder": "Nom du client…",
+    "noneSelected": "Aucun"
   },
   "hero": {
     "eyebrow": "demo",
@@ -128,7 +136,9 @@
   "recorded": "Décision enregistrée",
   "backToDashboard": "Retour au dashboard",
   "status": { "consistent": "Cohérent", "needs_review": "À vérifier" },
-  "choice": { "accept": "Acceptée", "reject": "Rejetée", "request_info": "Infos demandées" }
+  "choice": { "accept": "Acceptée", "reject": "Rejetée", "request_info": "Infos demandées" },
+  "needClient": "Choisis ou crée un client à l'étape 0 avant d'enregistrer une décision.",
+"saving": "Enregistrement…"
 },
   "error": {
     "generic": "Impossible de traiter ce fichier ."}

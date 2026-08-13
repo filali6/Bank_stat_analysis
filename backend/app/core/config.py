@@ -22,6 +22,7 @@ class Settings(BaseSettings):
     category_model_bundle_path: Path = APP_DIR / "data" / "models" / "category_model_bundle.pkl"
     scorecard_rules_path: Path = APP_DIR / "data" / "scorecard_rules.json"
     decision_rules_path: Path = APP_DIR / "data" / "decision_rules.json"
+    database_url: str = f"sqlite:///{APP_DIR / 'data' / 'app.db'}"
 
 
 settings = Settings()

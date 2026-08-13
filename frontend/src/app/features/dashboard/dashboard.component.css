@@ -116,3 +116,12 @@ td {
     background: #eef0fd;
     color: #4f46e5;
 }
+.status-rejected {
+    background: #fbeaea;
+    color: #b42318;
+}
+
+.empty-note {
+    color: #9ca3af;
+    font-size: 13.5px;
+}

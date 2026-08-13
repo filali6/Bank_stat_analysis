@@ -4,13 +4,27 @@
   <p class="subtitle">{{ 'dashboard.subtitle' | translate }}</p>
 
   <div class="stats-grid">
-    <div class="stat-card"><p class="stat-label">{{ 'dashboard.statTotal' | translate }}</p><p class="stat-value">{{ totalCount }}</p></div>
-    <div class="stat-card"><p class="stat-label">{{ 'dashboard.statPending' | translate }}</p><p class="stat-value">{{ pendingCount }}</p></div>
-    <div class="stat-card"><p class="stat-label">{{ 'dashboard.statValidated' | translate }}</p><p class="stat-value">{{ validatedCount }}</p></div>
+    <div class="stat-card">
+      <p class="stat-label">{{ 'dashboard.statTotal' | translate }}</p>
+      <p class="stat-value">{{ totalCount }}</p>
+    </div>
+    <div class="stat-card">
+      <p class="stat-label">{{ 'dashboard.statPending' | translate }}</p>
+      <p class="stat-value">{{ pendingCount }}</p>
+    </div>
+    <div class="stat-card">
+      <p class="stat-label">{{ 'dashboard.statValidated' | translate }}</p>
+      <p class="stat-value">{{ validatedCount }}</p>
+    </div>
   </div>
 
   <button class="new-study-button" (click)="newStudy()">+ {{ 'dashboard.newStudy' | translate }}</button>
 
+  @if (isLoading()) {
+  <p class="empty-note">{{ 'dashboard.loading' | translate }}</p>
+  } @else if (studies().length === 0) {
+  <p class="empty-note">{{ 'dashboard.noStudies' | translate }}</p>
+  } @else {
   <table>
     <thead>
       <tr>
@@ -21,14 +35,16 @@
       </tr>
     </thead>
     <tbody>
-      @for (s of studies; track s.client) {
-        <tr>
-          <td>{{ s.client }}</td>
-          <td>{{ s.date }}</td>
-          <td>{{ s.output }}</td>
-          <td><span class="status-pill" [class]="'status-' + s.status">{{ ('dashboard.status.' + s.status) | translate }}</span></td>
-        </tr>
+      @for (s of studies(); track s.id) {
+      <tr>
+        <td>{{ s.client_number }} — {{ s.client_label }}</td>
+        <td>{{ s.created_at | date: 'yyyy-MM-dd' }}</td>
+        <td>{{ outputLabel(s.output_type) }}</td>
+        <td><span class="status-pill" [class]="'status-' + statusClass(s.decision_choice)">{{ ('dashboard.status.' +
+            statusClass(s.decision_choice)) | translate }}</span></td>
+      </tr>
       }
     </tbody>
   </table>
+  }
 </div>
