@@ -1,0 +1,179 @@
+.metric-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.metric-grid.two-col {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.metric-card {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 16px;
+}
+
+.metric-card.highlight {
+    border-color: #4f46e5;
+    border-width: 2px;
+    background: #f8f8ff;
+}
+
+.metric-card .label {
+    font-size: 11.5px;
+    color: #9ca3af;
+    margin: 0 0 6px;
+}
+
+.metric-card .value {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0;
+    font-variant-numeric: tabular-nums;
+}
+
+.detail-card {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 18px 20px;
+    margin-bottom: 16px;
+}
+
+.card-title {
+    font-size: 12.5px;
+    font-weight: 700;
+    color: #9ca3af;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    margin: 0 0 12px;
+}
+
+.risk-banner {
+    padding: 12px 16px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 14px;
+    margin-bottom: 12px;
+}
+
+.risk-low {
+    background: #eaf6ee;
+    color: #1e7a3c;
+}
+
+.risk-medium {
+    background: #fdf3e3;
+    color: #9a6300;
+}
+
+.risk-high {
+    background: #fbeaea;
+    color: #b42318;
+}
+
+.alerts-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.alert-item {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-size: 13.5px;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+}
+
+.alert-severity {
+    font-size: 10.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 999px;
+}
+
+.severity-high .alert-severity {
+    background: #fbeaea;
+    color: #b42318;
+}
+
+.severity-medium .alert-severity {
+    background: #fdf3e3;
+    color: #9a6300;
+}
+
+.severity-low .alert-severity {
+    background: #eaf6ee;
+    color: #1e7a3c;
+}
+
+.empty-note {
+    color: #9ca3af;
+    font-size: 13.5px;
+    margin-bottom: 16px;
+}
+
+.profile-summary {
+    font-size: 14px;
+    color: #374151;
+    margin: 0 0 12px;
+}
+
+.checks-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.check-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 14px;
+    border-radius: 10px;
+    background: #f3f4f6;
+    font-size: 13.5px;
+}
+
+.check-status {
+    font-weight: 700;
+    color: #1e7a3c;
+}
+
+.check-item.needs-review .check-status {
+    color: #b42318;
+}
+
+.products-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.product-card {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 16px;
+}
+
+.product-name {
+    font-weight: 700;
+    color: #111827;
+    margin: 0 0 4px;
+}
+
+.product-reason {
+    font-size: 12.5px;
+    color: #6b7280;
+    margin: 0;
+}

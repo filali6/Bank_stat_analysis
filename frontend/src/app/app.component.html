@@ -1,6 +1,12 @@
-<div class="shell">
-  <app-sidebar></app-sidebar>
-  <main>
-    <router-outlet></router-outlet>
-  </main>
+<div class="chrome-wrap">
+  <app-top-header></app-top-header>
+  <app-tab-bar></app-tab-bar>
 </div>
+
+<main>
+  @if (workspace.activeTab().type === 'dashboard') {
+  <app-dashboard></app-dashboard>
+  } @else {
+  <app-study-workspace [tab]="workspace.activeTab()"></app-study-workspace>
+  }
+</main>

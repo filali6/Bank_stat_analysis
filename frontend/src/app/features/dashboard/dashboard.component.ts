@@ -1,9 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, signal } from '@angular/core';
-import { Router } from '@angular/router';
 
 import { EnrichmentApiService } from '../../core/services/enrichment-api.service';
-import { StudySessionService } from '../../core/services/study-session.service';
+import { WorkspaceTabsService } from '../../core/services/workspace-tabs.service';
 import { StudySummary } from '../../core/models/enriched-transaction.model';
 import { TranslatePipe } from '../../core/pipes/translate.pipe';
 
@@ -25,11 +24,7 @@ export class DashboardComponent implements OnInit {
   readonly studies = signal<StudySummary[]>([]);
   readonly isLoading = signal(false);
 
-  constructor(
-    private readonly router: Router,
-    private readonly session: StudySessionService,
-    private readonly api: EnrichmentApiService
-  ) {}
+  constructor(private readonly workspace: WorkspaceTabsService, private readonly api: EnrichmentApiService) {}
 
   ngOnInit(): void {
     this.isLoading.set(true);
@@ -65,7 +60,10 @@ export class DashboardComponent implements OnInit {
   }
 
   newStudy(): void {
-    this.session.reset();
-    this.router.navigate(['/studies/new']);
+    this.workspace.openNewStudyTab();
+  }
+
+  openRow(row: StudySummary): void {
+    this.workspace.openExistingStudyTab(row);
   }
 }

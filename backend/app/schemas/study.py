@@ -6,6 +6,7 @@ from pydantic import BaseModel
 
 class ClientOut(BaseModel):
     id: int
+    client_number: str
     label: str
     created_at: datetime
     monitoring_enabled: bool
@@ -37,6 +38,7 @@ class SaveStudyRequest(BaseModel):
 class StudyOut(BaseModel):
     id: int
     client_id: int
+    client_number: str
     client_label: str
     created_at: datetime
     output_type: str
@@ -56,6 +58,7 @@ class StudySummary(BaseModel):
     rows."""
 
     id: int
+    client_number: str
     client_label: str
     created_at: datetime
     output_type: str

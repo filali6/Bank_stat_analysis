@@ -33,21 +33,29 @@ h1 {
 
 .stat-card {
     background: #fff;
-    border: 1px solid #e5e7eb;
     border-radius: 12px;
-    padding: 16px;
+    box-shadow: 0 1px 2px rgba(17, 24, 39, 0.04), 0 4px 12px rgba(17, 24, 39, 0.05);
+    padding: 16px 18px;
+    transition: box-shadow 0.18s ease, transform 0.18s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 4px rgba(17, 24, 39, 0.05), 0 8px 20px rgba(17, 24, 39, 0.08);
 }
 
 .stat-label {
     font-size: 12px;
     color: #9ca3af;
-    margin: 0 0 4px;
+    margin: 0 0 8px;
 }
 
 .stat-value {
-    font-size: 22px;
+    font-size: 26px;
     font-weight: 700;
+    letter-spacing: -0.01em;
     margin: 0;
+    font-variant-numeric: tabular-nums;
 }
 
 .new-study-button {
@@ -67,30 +75,39 @@ h1 {
 
 table {
     width: 100%;
-   
     border-collapse: collapse;
     font-size: 13px;
     background: #fff;
-    border: 0px solid #c4c6c9;
     border-radius: 12px;
+    box-shadow: 0 1px 2px rgba(17, 24, 39, 0.04), 0 4px 12px rgba(17, 24, 39, 0.05);
     overflow: hidden;
 }
 
 thead tr {
-    background: #f3f3ff;
+    background: #f3f4f6;
 }
 
 th {
     text-align: left;
-    padding: 10px 14px;
-    font-size: 11px;
+    padding: 11px 16px;
+    font-size: 10.5px;
     text-transform: uppercase;
-    letter-spacing: 0.03em;
-    color: #6b7280;
+    letter-spacing: 0.04em;
+    color: #9ca3af;
+    font-weight: 600;
+}
+
+tbody tr {
+    cursor: pointer;
+    transition: background 0.15s ease;
+}
+
+tbody tr:hover {
+    background: #f9fafb;
 }
 
 td {
-    padding: 10px 14px;
+    padding: 13px 16px;
     border-top: 1px solid #f3f4f6;
 }
 
@@ -124,4 +141,29 @@ td {
 .empty-note {
     color: #9ca3af;
     font-size: 13.5px;
+}
+.new-study-button {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-left: auto;
+    margin-right: 0;
+    background: #4f46e5;
+    border: none;
+    color: #fff;
+    font-size: 13.5px;
+    font-weight: 600;
+    padding: 10px 20px;
+    border-radius: 9px;
+    cursor: pointer;
+    margin-bottom: 1.25rem;
+    transition: background 0.18s ease, transform 0.12s ease;
+}
+
+.new-study-button:hover {
+    background: #4338ca;
+}
+
+.new-study-button:active {
+    transform: scale(0.97);
 }

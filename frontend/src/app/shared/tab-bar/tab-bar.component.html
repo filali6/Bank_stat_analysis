@@ -1,0 +1,16 @@
+<div class="tabbar">
+    <div class="tabbar-inner">
+        @for (tab of workspace.tabs(); track tab.id) {
+        <button class="tab-chip" [class.active]="tab.id === workspace.activeTabId()"
+            (click)="workspace.switchTab(tab.id)">
+            <i class="ti" [class.ti-layout-dashboard]="tab.type === 'dashboard'"
+                [class.ti-file-analytics]="tab.type === 'study'" aria-hidden="true"></i>
+            <span>{{ tab.type === 'dashboard' ? ('sidebar.dashboard' | translate) : (tab.session?.tabTitle() ?? '')
+                }}</span>
+            @if (tab.closable) {
+            <span class="tab-close" (click)="close(tab.id, $event)">x<i class="ti ti-x" aria-hidden="true"></i></span>
+            }
+        </button>
+        }
+    </div>
+</div>

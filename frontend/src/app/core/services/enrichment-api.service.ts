@@ -24,6 +24,7 @@ export class EnrichmentApiService {
     formData.append('file', file);
     return formData;
   }
+
   computeFeatures(transactions: CategorizedTransaction[]): Observable<ClientFeatures> {
     return this.http.post<ClientFeatures>(`${this.baseUrl}/feature-engineering/compute`, { transactions });
   }
@@ -58,5 +59,9 @@ export class EnrichmentApiService {
 
   listStudies(): Observable<StudySummary[]> {
     return this.http.get<StudySummary[]>(`${this.baseUrl}/studies`);
+  }
+
+  getStudy(id: number): Observable<StudyOut> {
+    return this.http.get<StudyOut>(`${this.baseUrl}/studies/${id}`);
   }
 }

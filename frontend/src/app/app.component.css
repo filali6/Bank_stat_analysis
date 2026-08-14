@@ -1,2 +1,4 @@
-.shell { display: flex; min-height: 100vh; }
-main { flex: 1; overflow-x: hidden; }
+main {
+    display: block;
+    min-height: calc(100vh - 92px);
+}

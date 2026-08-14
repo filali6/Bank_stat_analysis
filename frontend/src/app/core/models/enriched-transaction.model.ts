@@ -28,6 +28,7 @@ export interface CategorizationResponse {
   total: number;
   transactions: CategorizedTransaction[];
 }
+
 export interface ClientFeatures {
   monthly_income: number;
   savings_rate: number;
@@ -36,6 +37,7 @@ export interface ClientFeatures {
   recurring_commitments: number;
   atm_withdrawal_ratio: number;
 }
+
 export interface LifestyleFeatures {
   lifestyle_segment: string;
   affluence_score: number;
@@ -45,6 +47,7 @@ export interface LifestyleFeatures {
   overall_lifestyle_index: number;
   reasons: string[];
 }
+
 export interface CreditDecisionDetails {
   credit_score: number;
   recommendation: string;
@@ -95,8 +98,10 @@ export interface AffordabilityResult {
   max_affordable_payment: number;
   affordable: boolean;
 }
+
 export interface Client {
   id: number;
+  client_number: string;
   label: string;
   created_at: string;
   monitoring_enabled: boolean;
@@ -118,6 +123,7 @@ export interface SaveStudyRequest {
 export interface StudyOut {
   id: number;
   client_id: number;
+  client_number: string;
   client_label: string;
   created_at: string;
   output_type: string;
@@ -133,6 +139,7 @@ export interface StudyOut {
 
 export interface StudySummary {
   id: number;
+  client_number: string;
   client_label: string;
   created_at: string;
   output_type: string;

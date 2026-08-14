@@ -18,7 +18,8 @@
     </div>
   </div>
 
-  <button class="new-study-button" (click)="newStudy()">+ {{ 'dashboard.newStudy' | translate }}</button>
+  <button class="new-study-button" (click)="newStudy()"><i class="ti ti-plus" aria-hidden="true"></i>{{
+    'dashboard.newStudy' | translate }}</button>
 
   @if (isLoading()) {
   <p class="empty-note">{{ 'dashboard.loading' | translate }}</p>
@@ -36,7 +37,7 @@
     </thead>
     <tbody>
       @for (s of studies(); track s.id) {
-      <tr>
+      <tr (click)="openRow(s)">
         <td>{{ s.client_number }} — {{ s.client_label }}</td>
         <td>{{ s.created_at | date: 'yyyy-MM-dd' }}</td>
         <td>{{ outputLabel(s.output_type) }}</td>

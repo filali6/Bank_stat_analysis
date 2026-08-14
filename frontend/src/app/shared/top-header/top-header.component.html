@@ -1,0 +1,24 @@
+<header>
+    <div class="header-inner">
+        <button class="brand" (click)="workspace.goToDashboard()">
+            <div class="brand-icon"><i class="ti ti-report-money" aria-hidden="true"></i></div>
+            <span class="brand-name">{{ 'header.title' | translate }}</span>
+        </button>
+
+        <div class="search-wrap">
+            <i class="ti ti-search" aria-hidden="true"></i>
+            <input type="text" placeholder="Search" />
+        </div>
+
+        <div class="header-actions">
+            <div class="lang-switch">
+                <button type="button" class="lang-button" [class.active]="translation.currentLang() === 'fr'"
+                    (click)="setLang('fr')">FR</button>
+                <button type="button" class="lang-button" [class.active]="translation.currentLang() === 'en'"
+                    (click)="setLang('en')">EN</button>
+            </div>
+            <button class="icon-btn" aria-label="Notifications"><i class="ti ti-bell" aria-hidden="true"></i></button>
+            <div class="avatar">A</div>
+        </div>
+    </div>
+</header>

@@ -1,4 +1,4 @@
-import { Injectable, signal } from '@angular/core';
+import { signal } from '@angular/core';
 
 import { EnrichmentApiService } from './enrichment-api.service';
 import { TranslationService } from './translation.service';
@@ -16,43 +16,48 @@ import {
 
 export type OutputKey = 'credit' | 'risk' | 'kyc' | 'opportunities';
 export type DecisionChoice = 'accept' | 'reject' | 'request_info';
+export type StudyPhase = 'client' | 'engine' | 'decision' | 'saved';
 
-@Injectable({ providedIn: 'root' })
-export class StudySessionService {
-  readonly selectedOutput = signal<OutputKey | null>(null);
-  readonly selectedFile = signal<File | null>(null);
-  readonly enrichmentResult = signal<EnrichmentResponse | null>(null);
-  readonly categorizationResult = signal<CategorizationResponse | null>(null);
-  readonly isLoadingEnrichment = signal(false);
-  readonly isLoadingCategorization = signal(false);
-  readonly errorMessage = signal<string | null>(null);
-  readonly clientFeatures = signal<ClientFeatures | null>(null);
-  readonly isLoadingFeatures = signal(false);
-  readonly lifestyleFeatures = signal<LifestyleFeatures | null>(null);
-  readonly isLoadingLifestyle = signal(false);
-  readonly decisionResult = signal<DecisionResult | null>(null);
-  readonly isLoadingDecision = signal(false);
-  readonly affordabilityResult = signal<AffordabilityResult | null>(null);
-  readonly isCheckingAffordability = signal(false);
+/**
+ * One instance = one open study tab. Unlike the old singleton service,
+ * this is a plain class: WorkspaceTabsService creates a new one every
+ * time a tab is opened, so several studies can be worked on in
+ * parallel without their state colliding.
+ */
+export class StudySession {
+  readonly phase = signal<StudyPhase>('client');
+  readonly engineStep = signal(0); // 0=Enrichment 1=Categorization 2=Feature engineering 3=Lifestyle
 
-  // --- Client picker (FR-A2) ------------------------------------------------
   readonly clients = signal<Client[]>([]);
   readonly isLoadingClients = signal(false);
   readonly selectedClientId = signal<number | null>(null);
   readonly newClientLabel = signal('');
 
-  // --- Persisted study (FR-A16, FR-A17) --------------------------------------
+  readonly selectedFile = signal<File | null>(null);
+  readonly enrichmentResult = signal<EnrichmentResponse | null>(null);
+  readonly categorizationResult = signal<CategorizationResponse | null>(null);
+  readonly clientFeatures = signal<ClientFeatures | null>(null);
+  readonly lifestyleFeatures = signal<LifestyleFeatures | null>(null);
+  readonly isLoadingEnrichment = signal(false);
+  readonly isLoadingCategorization = signal(false);
+  readonly isLoadingFeatures = signal(false);
+  readonly isLoadingLifestyle = signal(false);
+  readonly errorMessage = signal<string | null>(null);
+
+  readonly selectedOutput = signal<OutputKey | null>(null);
+  readonly decisionResult = signal<DecisionResult | null>(null);
+  readonly isLoadingDecision = signal(false);
+  readonly affordabilityResult = signal<AffordabilityResult | null>(null);
+  readonly isCheckingAffordability = signal(false);
+  readonly comment = signal('');
+
   readonly savedStudy = signal<StudyOut | null>(null);
   readonly isSavingStudy = signal(false);
+  readonly editing = signal(false);
 
-  constructor(
-    private readonly api: EnrichmentApiService,
-    private readonly translation: TranslationService
-  ) {}
+  readonly tabTitle = signal('Nouvelle étude');
 
-  selectOutput(key: OutputKey): void {
-    this.selectedOutput.set(key);
-  }
+  constructor(private readonly api: EnrichmentApiService, private readonly translation: TranslationService) {}
 
   loadClients(): void {
     this.isLoadingClients.set(true);
@@ -69,6 +74,8 @@ export class StudySessionService {
     this.selectedClientId.set(id);
     if (id !== null) {
       this.newClientLabel.set('');
+      const client = this.clients().find((c) => c.id === id);
+      if (client) this.tabTitle.set(client.label);
     }
   }
 
@@ -76,6 +83,7 @@ export class StudySessionService {
     this.newClientLabel.set(label);
     if (label.trim().length > 0) {
       this.selectedClientId.set(null);
+      this.tabTitle.set(label.trim());
     }
   }
 
@@ -83,14 +91,13 @@ export class StudySessionService {
     return this.selectedClientId() !== null || this.newClientLabel().trim().length > 0;
   }
 
+  continueToEngine(): void {
+    if (!this.hasClientChosen()) return;
+    this.phase.set('engine');
+  }
+
   uploadFile(file: File): void {
     this.selectedFile.set(file);
-    this.categorizationResult.set(null);
-    this.clientFeatures.set(null);
-    this.lifestyleFeatures.set(null);
-    this.decisionResult.set(null);
-    this.affordabilityResult.set(null);
-    this.savedStudy.set(null);
     this.isLoadingEnrichment.set(true);
     this.errorMessage.set(null);
 
@@ -108,7 +115,7 @@ export class StudySessionService {
 
   categorize(): void {
     const file = this.selectedFile();
-    if (!file) return;
+    if (!file || this.categorizationResult() || this.isLoadingCategorization()) return;
 
     this.isLoadingCategorization.set(true);
     this.errorMessage.set(null);
@@ -125,24 +132,9 @@ export class StudySessionService {
     });
   }
 
-  reset(): void {
-    this.selectedOutput.set(null);
-    this.selectedFile.set(null);
-    this.enrichmentResult.set(null);
-    this.categorizationResult.set(null);
-    this.clientFeatures.set(null);
-    this.lifestyleFeatures.set(null);
-    this.decisionResult.set(null);
-    this.affordabilityResult.set(null);
-    this.savedStudy.set(null);
-    this.selectedClientId.set(null);
-    this.newClientLabel.set('');
-    this.errorMessage.set(null);
-  }
-
   computeFeatures(): void {
     const categorized = this.categorizationResult();
-    if (!categorized) return;
+    if (!categorized || this.clientFeatures() || this.isLoadingFeatures()) return;
 
     this.isLoadingFeatures.set(true);
     this.errorMessage.set(null);
@@ -161,7 +153,7 @@ export class StudySessionService {
 
   computeLifestyle(): void {
     const features = this.clientFeatures();
-    if (!features) return;
+    if (!features || this.lifestyleFeatures() || this.isLoadingLifestyle()) return;
 
     this.isLoadingLifestyle.set(true);
     this.errorMessage.set(null);
@@ -176,6 +168,24 @@ export class StudySessionService {
         this.isLoadingLifestyle.set(false);
       },
     });
+  }
+
+  goToNextEngineStep(): void {
+    if (this.engineStep() < 3) {
+      this.engineStep.set(this.engineStep() + 1);
+    } else {
+      this.phase.set('decision');
+    }
+  }
+
+  goBackToClientStep(): void {
+    this.phase.set('client');
+  }
+
+  selectOutput(key: OutputKey): void {
+    this.selectedOutput.set(key);
+    this.decisionResult.set(null);
+    this.computeDecision();
   }
 
   computeDecision(): void {
@@ -217,10 +227,7 @@ export class StudySessionService {
     });
   }
 
-  /** Persists the completed study, at the moment the analyst confirms
-   * a decision (FR-A16, FR-A17). Real backend save now — no longer
-   * just kept in memory. */
-  saveDecision(choice: DecisionChoice, comment: string): void {
+  saveDecision(choice: DecisionChoice): void {
     const outputType = this.selectedOutput();
     const enrichment = this.enrichmentResult();
     const categorization = this.categorizationResult();
@@ -228,13 +235,7 @@ export class StudySessionService {
     const lifestyle = this.lifestyleFeatures();
     const decision = this.decisionResult();
 
-    if (!outputType || !enrichment || !categorization || !features || !lifestyle || !decision) {
-      return;
-    }
-    if (!this.hasClientChosen()) {
-      this.errorMessage.set(this.translation.t('decision.needClient'));
-      return;
-    }
+    if (!outputType || !enrichment || !categorization || !features || !lifestyle || !decision) return;
 
     this.isSavingStudy.set(true);
     this.errorMessage.set(null);
@@ -249,18 +250,37 @@ export class StudySessionService {
       lifestyle_features: lifestyle,
       decision_result: decision,
       decision_choice: choice,
-      decision_comment: comment || null,
+      decision_comment: this.comment() || null,
     };
 
     this.api.saveStudy(payload).subscribe({
       next: (saved) => {
         this.savedStudy.set(saved);
+        this.tabTitle.set(`${saved.client_number} — ${saved.client_label}`);
         this.isSavingStudy.set(false);
+        this.phase.set('saved');
       },
       error: (err) => {
         this.errorMessage.set(err?.error?.detail ?? this.translation.t('error.generic'));
         this.isSavingStudy.set(false);
       },
     });
+  }
+reopenForEditing(): void {
+    this.savedStudy.set(null);
+    this.phase.set('decision');
+  }
+  hydrateFromStudyOut(study: StudyOut): void {
+    this.enrichmentResult.set(study.enrichment_result as EnrichmentResponse);
+    this.categorizationResult.set(study.categorization_result as CategorizationResponse);
+    this.clientFeatures.set(study.client_features);
+    this.lifestyleFeatures.set(study.lifestyle_features);
+    this.decisionResult.set(study.decision_result);
+    this.selectedOutput.set(study.output_type as OutputKey);
+    this.selectedClientId.set(study.client_id);
+    this.comment.set(study.decision_comment ?? '');
+    this.savedStudy.set(study);
+    this.tabTitle.set(`${study.client_number} — ${study.client_label}`);
+    this.phase.set('saved');
   }
 }

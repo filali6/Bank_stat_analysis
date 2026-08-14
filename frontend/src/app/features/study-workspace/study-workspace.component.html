@@ -1,0 +1,16 @@
+@if (tab.session; as session) {
+@switch (session.phase()) {
+@case ('client') {
+<app-client-step [session]="session"></app-client-step>
+}
+@case ('engine') {
+<app-engine-steps [session]="session"></app-engine-steps>
+}
+@case ('decision') {
+<app-decision-workspace [session]="session"></app-decision-workspace>
+}
+@case ('saved') {
+<app-saved-study [session]="session"></app-saved-study>
+}
+}
+}

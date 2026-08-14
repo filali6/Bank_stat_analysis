@@ -1,0 +1,83 @@
+@import '../../shared/styles/step-actions.css';
+@import '../../shared/styles/decision-content.css';
+
+.edit-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #fff;
+    border: 1px solid #d1d5db;
+    color: #111827;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 8px 14px;
+    border-radius: 9px;
+    cursor: pointer;
+    transition: background 0.15s ease;
+}
+
+.edit-button:hover {
+    background: #f3f4f6;
+}
+
+.page-head {
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 0 24px 20px;
+}
+
+.eyebrow {
+    font-size: 12px;
+    font-weight: 600;
+    color: #4f46e5;
+    margin: 0 0 4px;
+}
+
+h1 {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin: 0;
+}
+
+.results {
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 0 24px 48px;
+}
+
+.saved-banner {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #eaf6ee;
+    color: #1e7a3c;
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 18px;
+}
+
+.headline-banner {
+    background: #eef0fd;
+    border: 1px solid #c7cbf5;
+    border-radius: 12px;
+    padding: 18px 20px;
+    margin-bottom: 16px;
+}
+
+.headline-label {
+    font-size: 11.5px;
+    color: #4f46e5;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    margin: 0 0 4px;
+}
+
+.headline-value {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0;
+}
