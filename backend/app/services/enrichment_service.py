@@ -6,8 +6,8 @@ from app.services.merchant_identifier import MerchantIdentifier
 from app.services.recurrence_detector import detect_recurring
 from app.utils.text_normalization import normalize_text
 
-VALIDATED_THRESHOLD = 85
-REVIEW_THRESHOLD = 50
+# VALIDATED_THRESHOLD = 85
+# REVIEW_THRESHOLD = 50
 
 
 class EnrichmentService:

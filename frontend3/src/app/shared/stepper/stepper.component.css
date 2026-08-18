@@ -1,0 +1,118 @@
+:host {
+  display: block;
+}
+
+.stepper {
+  display: flex;
+  align-items: flex-start;
+}
+
+.stepper.horizontal {
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+}
+
+.stepper.vertical {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.stepper-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.stepper.vertical .stepper-item {
+  flex-direction: row;
+  align-items: center;
+}
+
+.stepper-item.disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.stepper-circle {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 2px solid #d7dce3;
+  color: var(--color-text-faint);
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: #fff;
+  transition: border-color 0.18s ease, background 0.18s ease, color 0.18s ease;
+}
+
+.stepper-circle.active {
+  border-color: var(--color-primary);
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+}
+
+.stepper-circle.completed {
+  border-color: var(--color-primary);
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.stepper-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-text-faint);
+  white-space: nowrap;
+}
+
+.stepper-item.completed .stepper-label {
+  color: var(--color-text-muted);
+}
+
+.stepper-label.active {
+  color: var(--color-text);
+  font-weight: 700;
+}
+
+.stepper-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  visibility: hidden;
+}
+
+.stepper-item.active .stepper-dot {
+  visibility: visible;
+}
+
+.stepper.horizontal .stepper-connector {
+  width: clamp(28px, 6vw, 70px);
+  height: 2px;
+  background: #e2e6ec;
+  margin: 12px 4px 0;
+  flex-shrink: 0;
+}
+
+.stepper.horizontal .stepper-connector.completed {
+  background: var(--color-primary);
+}
+
+.stepper.vertical .stepper-connector {
+  width: 2px;
+  height: 22px;
+  background: #e2e6ec;
+  margin: 4px 0 4px 12px;
+}
+
+.stepper.vertical .stepper-connector.completed {
+  background: var(--color-primary);
+}

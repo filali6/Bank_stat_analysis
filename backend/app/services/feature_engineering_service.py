@@ -23,15 +23,15 @@ class FeatureEngineeringService:
         savings_total = sum(abs(t.montant) for t in transactions if t.category == "Savings" and t.montant < 0)
         travel_total = sum(abs(t.montant) for t in transactions if t.category == "Travel")
         grocery_total = sum(abs(t.montant) for t in transactions if t.category == "Groceries")
-        recurring_total = sum(abs(t.montant) for t in transactions if t.recurring and t.montant < 0)
         atm_total = sum(abs(t.montant) for t in transactions if t.transaction_type == "Withdrawal")
+        recurring_commitments = self._compute_monthly_recurring_commitments(transactions)
 
         return ClientFeatures(
             monthly_income=round(monthly_income, 2),
             savings_rate=self._safe_ratio(savings_total, monthly_income),
             travel_spend_ratio=self._safe_ratio(travel_total, total_expenses),
             grocery_spend_ratio=self._safe_ratio(grocery_total, total_expenses),
-            recurring_commitments=round(recurring_total, 2),
+            recurring_commitments=round(recurring_commitments, 2),
             atm_withdrawal_ratio=self._safe_ratio(atm_total, total_expenses),
         )
 
@@ -53,6 +53,35 @@ class FeatureEngineeringService:
         months_sorted = sorted(income_by_month.keys())
         recent_months = months_sorted[-3:]
         recent_values = [income_by_month[m] for m in recent_months]
+        return sum(recent_values) / len(recent_values)
+
+    def _compute_monthly_recurring_commitments(self, transactions: List[CategorizedTransaction]) -> float:
+        """Same recency + averaging approach as _compute_monthly_income:
+        average over the 3 most recent months that actually have
+        recurring spending, instead of a raw sum over the whole file.
+        Two fixes over the previous version:
+        1. The old raw sum grew with however many months the file
+           happened to cover — comparing an ever-growing total against
+           an already-monthly income made the ratio meaningless for
+           files spanning more than one month.
+        2. Savings transfers are excluded — the merchant dictionary
+           marks them "recurring" too (they do repeat monthly), but
+           "recurring" only means "repeats", not "is a bill". Money a
+           client moves into savings is money they keep, the opposite
+           of a financial commitment.
+        """
+        commitments_by_month = defaultdict(float)
+        for t in transactions:
+            if t.recurring and t.montant < 0 and t.category != "Savings":
+                month_key = t.date[:7]
+                commitments_by_month[month_key] += abs(t.montant)
+
+        if not commitments_by_month:
+            return 0.0
+
+        months_sorted = sorted(commitments_by_month.keys())
+        recent_months = months_sorted[-3:]
+        recent_values = [commitments_by_month[m] for m in recent_months]
         return sum(recent_values) / len(recent_values)
 
     @staticmethod

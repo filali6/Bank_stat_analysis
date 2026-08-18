@@ -1,0 +1,68 @@
+:host {
+    display: contents;
+}
+
+.tabbar {
+    display: contents;
+}
+
+.tabbar-inner {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    overflow-x: auto;
+    flex: 1;
+    min-width: 0;
+    order: 2;
+}
+
+.tab-chip {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 8px 14px;
+    font-size: 12.5px;
+    border: none;
+    border-radius: 999px;
+    background: none;
+    cursor: pointer;
+    color: #6b7280;
+    white-space: nowrap;
+    font-family: inherit;
+    font-weight: 500;
+    transition: background 0.18s ease, color 0.18s ease;
+}
+
+.tab-chip.active {
+    background: var(--color-primary);
+    color: #fff;
+}
+.tab-chip.active .tab-close:hover {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+.tab-chip:hover:not(.active) {
+    background: #f3f4f6;
+    color: #111827;
+}
+
+.tab-close {
+    font-size: 12px;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    line-height: 1;
+    transition: background 0.15s ease;
+}
+
+.tab-close i {
+    display: block;
+    line-height: 1;
+}
+
+.tab-close:hover {
+    opacity: 1;
+}

@@ -12,6 +12,8 @@ from app.services.merchant_category_lookup import lookup_category_from_label
 from app.utils.text_normalization import normalize_text
 
 DICTIONARY_CONFIDENCE = 0.99
+VALIDATED_THRESHOLD = 0.85
+REVIEW_THRESHOLD = 0.50
 
 
 class CategorizationService:
@@ -68,8 +70,15 @@ class CategorizationService:
             business_purpose=business_purpose,
             lifestyle_tag=lifestyle_tag,
             confidence=round(confidence, 4),
+            status=self._compute_status(confidence),
         )
-
+    @staticmethod
+    def _compute_status(confidence: float) -> str:
+        if confidence >= VALIDATED_THRESHOLD:
+            return "validated"
+        if confidence >= REVIEW_THRESHOLD:
+            return "needs_review"
+        return "unreliable"
     def _split_combo(self, combo: str) -> Tuple[str, str]:
         separator = self._models.combo_separator
         if separator in combo:

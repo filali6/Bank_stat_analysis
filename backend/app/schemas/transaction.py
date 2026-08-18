@@ -64,6 +64,7 @@ class CategorizedTransaction(EnrichedTransaction):
     business_purpose: str
     lifestyle_tag: str
     confidence: float
+    status: str
 
 
 class CategorizationResponse(BaseModel):

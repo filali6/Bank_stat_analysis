@@ -1,0 +1,141 @@
+:host {
+    display: contents;
+}
+
+header {
+    display: contents;
+}
+
+.header-inner {
+    display: contents;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+    background: none;
+    border: none;
+    padding: 4px 2px;
+    cursor: pointer;
+    order: 1;
+}
+
+.brand-icon {
+    width: 26px;
+    height: 26px;
+    border-radius: 7px;
+    background: var(--color-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 14px;
+}
+
+.brand-name {
+    font-size: 13.5px;
+    font-weight: 600;
+    color: #111827;
+}
+
+.search-wrap {
+    flex: 0 1 220px;
+    max-width: 220px;
+    position: relative;
+    order: 3;
+}
+
+.search-wrap i {
+    position: absolute;
+    left: 11px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #9ca3af;
+    font-size: 15px;
+}
+
+.search-wrap input {
+    width: 100%;
+    padding: 8px 12px 8px 32px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    font-size: 13px;
+    font-family: inherit;
+    background: #f3f4f6;
+    color: #111827;
+    outline: none;
+    transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.search-wrap input:focus {
+    border-color: var(--color-primary);
+    background: #fff;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-shrink: 0;
+    order: 4;
+}
+
+.lang-switch {
+    display: flex;
+    background: #f3f4f6;
+    border-radius: 8px;
+    padding: 2px;
+}
+
+.lang-button {
+    border: none;
+    background: transparent;
+    color: #6b7280;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 9px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease;
+}
+
+.lang-button.active {
+    background: var(--color-primary);
+    color: #fff;
+}
+
+.icon-btn {
+    background: none;
+    border: none;
+    color: #6b7280;
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    padding: 0;
+    transition: color 0.15s ease;
+}
+
+.icon-btn:hover {
+    color: #111827;
+}
+
+.avatar {
+    width: 27px;
+    height: 27px;
+    border-radius: 50%;
+    background: var(--color-primary-light);
+    color: var(--color-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11.5px;
+    font-weight: 600;
+}
+
+@media (max-width: 640px) {
+    .search-wrap {
+        display: none;
+    }
+}
